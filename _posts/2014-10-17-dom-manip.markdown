@@ -1,0 +1,259 @@
+---
+layout: post
+title:  "Dom Manipulation"
+date:   2014-10-17 03:24:54
+categories: update
+---
+
+
+The DOM
+---------------------
+
+Which sounds scary and overbearing but it probably isn't maybe.
+
+[Mozilla Docs on the DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
+
+> The Document Object Model (DOM) is a programming interface for HTML and XML documents. It provides a structured representation of the document and it defines a way that the structure can be accessed from programs so that they can change the document structure, style and content. The DOM provides a representation of the document as a structured group of nodes and objects that have properties and methods. Essentially, it connects web pages to scripts or programming languages.
+
+(From the Mozzilla docs)
+
+This is a really wordy way to say that, in general, the DOM is a way to *access the stuff on your page*. It comes in two pieces.
+
+1.  The document's representation in computer memory. In essence, behind the scenes the DOM is all the visible (and invisible) stuff in your page stored in the computer's memory so you can easily access it.
+2. A way to find and modify the things inside the DOM
+
+Getting a reference to something in the DOM
+-----------------------------
+
+
+Several methods (all inside of havascript)
+
+1. document.getElementsByTagName("tagName");
+2. document.getElementById("id");
+3. document.getElementByClassName("className");
+4. document.querySelector("#css .selector");
+
+All of these return a [DOM Element](https://developer.mozilla.org/en-US/docs/Web/API/element) (or an array of DOM elements) reference.
+
+
+References
+------------------------------
+
+- When you are programming, variables are not the actual thing they contain
+- Instead, variables are pointers to the actual thing
+- In other words, the variables you are working with are more like names than things
+
+- I am a single entity
+- But you might call me “Travis”, “Mr. Faas”, “Teacher”, “Teech”, or even “That guy”
+- Those are all references to the entity that is me
+
+References in Code
+------------------------------
+
+document.getElementById gets a reference to the DOM element.
+So, this is totally valid:
+
+{% highlight javascript %}
+var refOne = document.getElementById(“myDiv”);
+var refTwo = document.getElementById(“myDiv”);
+{% endhighlight %}
+
+Both are references to myDiv, though neither of them actually **are** myDiv
+
+
+Get element by ID
+-------------------------------
+
+{% highlight javascript %}
+//now I have a reference to myDiv element
+var divRef = document.getElementByID('myDiv');
+{% endhighlight %}
+
+{% highlight html %}
+<div id="myDiv">
+	<p>Hi!</p>
+</div>
+{% endhighlight %}
+
+
+Get element by class name
+-------------------------------
+
+- Return an **array**
+
+{% highlight javascript %}
+//now I an array of references to all the elements with clas 'sunny'
+var divRefs = document.getElementsByClassName('sunny');
+{% endhighlight %}
+
+{% highlight html %}
+<ul>
+	<li class="sunny">Hello</li>
+	<li class="sunny">Goodbye</li>
+</ul>
+{% endhighlight %}
+
+DOM Elements
+-------------------------------
+
+[DOM element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement) have some useful properties
+
+- innerHTML
+- style
+- className
+- parent
+
+Inner HTML
+--------------------------------
+
+- Changes the html within the tag
+
+//changes the stuff within the tag
+{% highlight javascript %}
+myDivRef.innerHTML = "<a href='#'>Hello world!</a>";
+{% endhighlight %}
+
+BEFORE
+{% highlight html %}
+<div></div>
+{% endhighlight %}
+
+AFTER
+{% highlight html %}
+<div> <a href='#'>Hello world!</a></div>
+{% endhighlight %}
+
+
+Changing styles
+-----------------------------------------
+
+Use the style property, and its sub properties
+
+{% highlight javascript %}
+myDivRef.style.backgroundColor = “#00FF00”;
+myDivRef.style.width = 100;
+{% endhighlight %}
+
+Style Caveat
+-------------------------------------------
+
+The properties use camel-casing where CSS uses the dash
+
+**CSS**
+background-color
+
+**JS**
+backgroundColor
+
+[Full list of properties.](http://www.w3schools.com/jsref/dom_obj_style.asp)
+
+Class
+-------------------------------------------
+
+Sometimes you might want to have a prestyled class and just add it to the DOM element at runtime. You can change its **class name**.
+
+{% highlight javascript %}
+myDivRef.className = "navitem"; //sets the mydivref's class to "navitem"
+{% endhighlight %}
+
+
+Creating new elements
+---------------------------------------
+
+**document.createElement**
+
+- A way to create DOM elements before adding them to the DOM
+- Takes one argument, a tag name
+- Needs to be a valid tag
+
+{% highlight javascript %}
+var madeDiv = document.createElement("div");
+var madeUL = document.createElement("ul");
+{% endhighlight %}
+
+
+Styling newly created elements
+---------------------------------------
+
+{% highlight javascript %}
+var elm = document.createElement("DIV")
+elm.style.height = 100;
+elm.style.width = 100;
+elm.style.backgroundColor = "#FF0000";
+elm.style.float = "left";
+{% endhighlight %}
+
+
+Adding new elements
+----------------------------------------
+
+- domElementRef.appendChild
+
+{% highlight javascript %}
+var elm = document.createElement("DIV")
+elm.innerHTML= "Hello there!";
+
+var divToAddTo = document.getElementById("myDiv");
+divToAddTo.appendChild(elm);
+{% endhighlight %}
+
+
+Removing elements
+----------------------------------------
+
+**removeChild(childToRemove)**
+Must be called on the parent container. The one argument is the element to remove
+
+To remove an element:
+
+{% highlight javascript %}
+parentDiv.removeChild(myDiv);
+{% endhighlight %}
+
+To remove an element (if you don’t know its parent):
+
+{% highlight javascript %}
+myDivRef.parent.removeChild(myDivRef);
+{% endhighlight %}
+
+
+Sidenote on parent, child
+----------------------------------------
+
+{% highlight javascript %}
+<div><!-- parent -->>
+	<div></div> <!-- child -->
+</div>
+{% endhighlight %}
+
+
+Some examples
+--------------------------------------
+
+
+Adding divs with a loop
+-------------------------------------
+
+{% highlight javascript %}
+for(var i = 0; i < 10; i++) {
+	var elm = document.createElement("DIV")
+	loopDivRef.appendChild(elm);
+}
+{% endhighlight %}
+
+
+Random CSS color
+--------------------------------------
+
+{% highlight javascript %}
+function randomColor() {
+
+	var randomRed = Math.floor(Math.random() * 255);
+	var randomGreen = Math.floor(Math.random() * 255);
+	var randomBlue = Math.floor(Math.random() * 255);
+	//create the string that is the ‘random color’
+	var randomColor = "rgb("+randomRed+","+randomGreen+","+randomBlue+")";
+
+	return randomColor;
+}
+{% endhighlight %}

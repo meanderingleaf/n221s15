@@ -1,0 +1,81 @@
+---
+layout: post
+title:  "Saving and Loading Data"
+date:   2014-11-12 03:24:54
+categories: update
+---
+
+Saving data
+-------------------------
+
+Our applications, up to this point, had no way to save any of the wonderful work our users had been doing. That is, once the user leaves that page (or, even worse, their web browser crashes!), they will not be able to return to where they were, before.
+
+Having a way to save data outside of javascript's memory will let a programer create an application that will persist beyond just one use.
+
+Local storage
+--------------------------
+
+Local storage is a way to store *textual* data on the user's device, and retrieve it later on. It works based off of key-value pairs, much like a javascript object. Here is an example:
+
+{% highlight javascript %}
+//sets the name
+localStorage['dogName'] = "Blue";
+
+//gets whatever is stored, even if the user leaves the page and comes back
+localStorage['dogName']; //would return "Blue"
+{% endhighlight %}
+
+
+Dealing with the stringiness
+--------------------------------
+
+Quite often we will want to store data that is not just textual. Below are a few ways to deal with this constraint of local storage.
+
+**storing numbers**
+
+{% highlight javascript %}
+
+var age = 5;
+
+//use toString() to turn the number into a string
+localStorage['dogAge'] = age.string();
+
+//use parse float to turn the string back into a number
+var loadedAge = parseFloat(localStorage['dogAge']);
+{% endhighlight %}
+
+
+**storing arrays**
+
+Arrays, again, are similar. This will work for arrays of numbers or strings.
+
+{% highlight javascript %}
+
+var ideas = [ "good", "bad", "horrific" ];
+
+//use toString() to turn the number into a string
+localStorage['dogIdeas'] = ideas.toString();
+
+//use parse float to turn the string back into a number
+var loadedIdeas = localStorage['dogAge'].split(',');
+{% endhighlight %}
+
+
+String replacement
+--------------------------------------
+
+Sometimes you just really need to do a find and replace on a string. You can use the .replace method replace substrings in a string what whatever you want. An example!
+
+{% highlight javascript %}
+
+var startString = "Digital Media".
+
+var replacedString = startString.replace("Media", "Love");
+
+console.log(startString); //will show "Digital Media";
+console.log(replacedString); //will show "Digital Love"
+
+{% endhighlight %}
+
+
+The major thing to note is that the replace method **does not change the original string** but rather just returns a new string with the replaced items. If you want to keep this replaced sting you will need to store it in a new variable.

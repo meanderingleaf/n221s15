@@ -1,0 +1,36 @@
+# Title of your blog; shows in the header
+name: "Notes 221"
+
+# Description of your content (will only be used on Google Search)
+description: "Because I will never find a good and easy way to show notes"
+
+# Your name. Will show in your footer + sidebar 
+author: "Travis Faas"
+
+url: "http://meanderingleaf.github.io"
+baseurl: "/n221f14"
+
+# A short presentation of yourself. Will show in the sidebar, under your name. Best usage would be between 30 to 50 words. 
+author-bio: "Teacher."
+
+# Social Accounts (mine, as placeholders)
+
+twitter: meanderingleaf
+github: meanderingleaf
+
+# Google Analytics (you may want to changes these with yours or even delete :)
+
+# Other (refer to http://jekyllrb.com/docs/home/ for further details on the below)
+
+markdown: kramdown
+permalink: pretty
+highlighter: pygments
+
+paginate: 10
+paginate_path: "/page/:num"
+
+# SCSS
+
+sass:
+  sass_dir: _scss
+  style: :compressed

@@ -1,0 +1,169 @@
+---
+layout: post
+title:  "CSS Basics"
+date:   2014-11-20 03:24:54
+categories: update
+---
+
+
+A quick rundown of CSS.
+--------------------------
+
+CSS (short for cascading style sheets) is a way to change the placement and appearance of items in your document. In comes in two parts: a **selector** that selects what element (or elements) you want to style, and a the **styles** which are a series of name-value pairs that specify style properties and the values you wish to set those styles to.
+
+{% highlight css %}
+selector {
+ property: value;
+}
+{% endhighlight %}
+
+
+
+Box model
+-----------------------
+
+Technically there's a lot more going on about the box model with css. But, for this class, just keep in mind that *all elements on the screen take up a certain, box shape*/
+
+By default, divs will take up an entire row of the screen and push subsequent elements beneath them.
+
+Where to put your stylesheet
+--------------------------
+
+You can either put them into an external .css file and link them to your project with a `<link href="tyles.css" rel="stylesheet" type="text/css" />`
+
+Or you can write your styles inside of a set of `<style>` tags in your html document.
+
+Selectors
+--------------------------
+
+There are three major ways to select elements to be styled.
+
+1. Via the tag names.
+
+{% highlight css %}
+/* apply this style to all pagraph tags */
+ p {
+
+ }
+
+/* apply this style to all header ones */
+ h1 {
+
+ }
+{% endhighlight %}
+
+2. Via class names (use a . before the name to specify you're select a class)
+
+{% highlight css %}
+	/* any element with class='diglet' will have this style applied to it*/
+	.diglet {
+
+	}
+{% endhighlight %}
+
+3. Via IDs (a a # before the name to specify you're selecting an element with an ID)
+
+{% highlight css %}
+	/* the element with id='highlander' will have this style applied to it*/
+	#highlander {
+
+	}
+{% endhighlight %}
+
+
+Subselection
+--------------------------
+
+You can further refine your selections by selecting sub elements of the first matched element
+
+{% highlight css %}
+	/* this will select all elements of class of diglet, contained within an element with an ID of highlander*/
+	#highlander .diglet {
+
+	}
+{% endhighlight %}
+
+
+Actually styling
+----------------------------
+
+The second part of a stylesheet is the series of names and values to set those properties to.
+
+Some major ones will will be dealing with in this class:
+
+- height (make sure to put 'px' after the size)
+- width (make sure to put 'px' after the size)
+- color (which is the color of the text)
+- background-color (the.. color of the background)
+- top ( the upper corner position of the box)
+- left ( the upper-corner position of the box)
+- position (if we have control over it, or the layout engine does)
+- opacity (how visible / see through something is)
+
+
+Height and width
+------------------------
+
+- Sets the height and width of an element
+
+{% highlight css %}
+	#highlander {
+		height: 100px;
+		width: 200px;
+	}
+{% endhighlight %}
+
+color
+---------------
+
+- Sets the color of the text inside of an object
+- Takes a hex color value
+
+{% highlight css %}
+	#highlander {
+		color: #00FF00;
+	}
+{% endhighlight %}
+
+background-color
+------------------
+
+- Sets the background color of the box the element takes up on the screen
+- Takes a hex color value
+
+{% highlight css %}
+
+	#highlander {
+		background-color: #00FF00;
+	}
+{% endhighlight %}
+
+Opacity
+-------------------
+
+- How visible the element's box is
+- Goes from 0 (not visible) to 1 (fully visible)
+
+{% highlight css %}
+
+	#highlander {
+		opacity: .7;
+	}
+{% endhighlight %}
+
+Position
+-----------------
+
+- By default the web browser lays out your design and forces your elements into certain positions
+- if you want to control exactly where your element is positioned, you need to set it to absoulte.
+- Once you do, you can position it on the x and y axes using the left and right properties
+
+{% highlight css %}
+
+	/* sets a box to always be at pixel position 100, 100 */
+	#highlander {
+		position: absolute;
+		top: 100px;
+		left: 100px;
+	}
+{% endhighlight %}

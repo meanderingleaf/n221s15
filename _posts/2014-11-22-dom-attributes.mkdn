@@ -1,0 +1,149 @@
+---
+layout: post
+title:  "Dom Atributes"
+date:   2014-11-22 03:24:54
+categories: update
+---
+
+
+Dom attributes
+------------------------
+
+Major difficulty in applications is storing a reference to some extra bit of data that is not currently displayed.
+
+For example:
+
+On twitter there is a username. Clicking on that username will bring up more information about the user. When the page first loads that information is not currently loaded to the application. *Somehow* the application knows who the user is and is able to, with ease, look up extra information that's not visible by storing some extra information inside of the markup that you don't currently see.
+
+**Here's a problem**
+
+{% highlight css %}
+
+<body>
+	<div class="gourd">Big gourd!</div>
+	<div class="gourd">Small gourd!</div>
+</body>
+<script>
+
+	var extraInfo = [ "This is a really big gourd", "This gourd is not quite as large"];
+
+	var gourds = document.getElementsByClassName('gourd');
+	for( var i = 0; i < gourds.length; i++) {
+		gourds[i].addEventListener('click', onGourdClick);
+	}
+
+	function onGourdClick(event) {
+		//How do we get the extra info stored about the gourds in the array?
+		//In other words.
+	}
+</script>
+
+{% endhighlight %}
+
+
+
+A few ways to 
+---------------------------
+
+- Classes
+- IDs
+- Custom attributes
+
+Classes
+--------------------------
+
+We can get the class on any DOM element with the `.className` property. Can be useful when you want to run code whenever only a specific type of element is clicked.
+
+{% highlight css %}
+
+<body>
+	<div id="cloud" class="bolt">Its a cloud.</div>
+	<div id="rain">Oh dear rain.</div>
+</body>
+<script>
+	var cloudRef = document.getElementById('cloud');
+	var rainRef = document.getElementById('rain');
+	
+	cloudRef.addEventListener("click", checkLightning);
+	rainRef.addEventListener("click", checkLightning);
+
+	function checkLightning(event) {
+		if(event.target.className == 'bolt') {
+			event.target.style.color = "#FFFF00";
+			console.log("zzzzap");
+		}
+	}
+</script>
+
+{% endhighlight %}
+
+
+
+IDs
+--------------------------
+
+We can also use IDs to run code based on precisely what was clicked. To get the ID of an DOM element, one would use `.getAttribute('id')`
+
+Here is an example that gets us closer to a solution to our gourd problem.
+
+{% highlight css %}
+
+<body>
+	<div id="bigGourd" class="gourd">Big gourd!</div>
+	<div id="smallGourd" class="gourd">Small gourd!</div>
+</body>
+<script>
+
+	var extraInfo = [ "This is a really big gourd", "This gourd is not quite as large"];
+
+	var gourds = document.getElementsByClassName('gourd');
+	for( var i = 0; i < gourds.length; i++) {
+		gourds[i].addEventListener('click', onGourdClick);
+	}
+
+	function onGourdClick(event) {
+		if(event.target.getAttribute('id') == 'bigGourd') {
+			//its the first entry in the array
+		} else  if( event.target.getAttribute == 'smallGourd') {
+			//its the second entry in the array
+		}
+	}
+</script>
+
+{% endhighlight %}
+
+Custom attributes
+----------------------------
+
+The ID's got us close, but it would be a lot of work to add a separete clause for each index in our array. It would be much easier if the dom elements themselves knew which array index they were linked to. We can get to that with a custom attribute. 
+
+These are attribues that are not used by HTML or for normal markup purposes, but instead work as 'extra information' associated with the DOM element. Sometimes prepended with a "data-" to mark that it is associated data with the element.
+
+
+Here is an example, making our gourds a bit easier to work with.
+
+{% highlight css %}
+
+<body>
+	<div id="bigGourd" class="gourd" data-index="0">Big gourd!</div>
+	<div id="smallGourd" class="gourd" data-index="1">Small gourd!</div>
+</body>
+<script>
+
+	var extraInfo = [ "This is a really big gourd", "This gourd is not quite as large"];
+
+	var gourds = document.getElementsByClassName('gourd');
+	for( var i = 0; i < gourds.length; i++) {
+		gourds[i].addEventListener('click', onGourdClick);
+	}
+
+	function onGourdClick(event) {
+		var arrayIndex = event.target.getAttribute('data-index');
+		console.log(extraInfo[arrayIndex]);
+	}
+
+</script>
+
+{% endhighlight %}
+
+Note the data-index attribute in the gourd tags, set to their respective indicies in the extra data array. When one of the gourds is clicked, we get its data-index attribute, and access the data from the array using it.

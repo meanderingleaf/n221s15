@@ -1,0 +1,274 @@
+---
+layout: post
+title:  "Arrays"
+date:   2014-09-10 03:24:54
+categories: update
+---
+
+
+Arrays
+-------------------
+
+- Arrays are also a collection of variables. They used for lists of similar variables (i.e. a bunch of numbers, or images).
+- Arrays are indexed. Supplying the index (typically a number) to the array will return the variable at that index.
+- Array indexes start at zero (0), and progress upwards
+- To get an item out of the array, use the square brackets and the index
+
+Array Metaphor
+-------------------
+
+![Metaphore]({{ site.baseurl }}/assets/img/cabinet.png)
+
+- You could think of arrays as a filing cabinet…
+- You can only put one item into each box, and you label them so you can find them with ease.
+- The labels are the indexes of the cabinet / array
+
+![Metaphore]({{ site.baseurl }}/assets/img/array_drawing.png)
+
+![Metaphore]({{ site.baseurl }}/assets/img/array_drawing_2.png)
+
+
+Making an Array
+---------------------
+
+{% highlight javascript %}
+	var myArray:number[] = [1,2,3,4];
+{% endhighlight %}
+
+{% highlight javascript %}
+	var myArray:string[] = [];
+{% endhighlight %}
+
+
+Getting a value out of an array
+-----------------------
+
+
+Write the square brackets, and inside the index you want.
+
+{% highlight javascript %}
+	var myArray:number[] = [5,4,3,2,1];
+	myArray[0]; // 5
+	myArray[2]; // 3
+	myArray[3]; // 2
+{% endhighlight %}
+
+
+Modifying the array
+-------------------------
+
+
+- Write the square brackets to get to what is stored in that index of the array
+- Works just like a variable
+
+{% highlight javascript %}
+	myArray[0] = 5;
+	myArray[3] = 39;
+{% endhighlight %}
+
+Useful array properties and methods
+--------------------------
+
+- **length**: returns the number of elements in the array
+- **push(something)**: adds an element at index zero, pushes all others back
+- **pop()**: takes a variable off the top of the array and returns it
+- **shift(something)**: adds an element at the very end of the array
+- **unshift()**: takes a variable off the bottom of the array
+- **sort()**: will sort the variables numerically or alphabetically
+- **splice(index, number)**: removes and returns (number) of elements from the array, starting at (index)
+- **toString()**: Like number.toString. This returns a string of every entry in the array
+
+Some array examples
+---------------------------------
+
+{% highlight javascript %}
+	var myArray:string[] = new Array("This", "array", "already", "has", "some", "content"); 
+	console.log(myArray[0]); 
+	console.log(myArray[2]); 
+	console.log(myArray.toString());
+{% endhighlight %}
+
+Output
+This 
+already 
+This, array, already, has, some, content
+
+{% highlight javascript %}
+	var myArray:string[] = new Array("This", "array", "already", "has", "some", "content");
+	var firstWord = myArray.pop(); 
+	console.log(firstWord); 
+	var lastWord = myArray.shift();
+	console.log(lastWord); 
+	console.log("Length " + myArray.length);
+{% endhighlight %}
+
+Output
+This 
+content 
+Length: 4
+
+
+Splitting strings
+------------------------------
+
+Its possible to make an array out of strings by splitting  them
+
+Example:
+
+{% highlight javascript %}
+	var statement = “Some dogs have two teeth”;
+	var splitStatement:string[] = statement.split(“ “); //split on the spaces
+{% endhighlight %}
+
+The data in splitStatement will be
+[ “some”, “dogs”, “have”, “two”, “teeth” ]
+
+
+Yep, you can split on anything
+
+{% highlight javascript %}
+	var source = “Dogs,cats,rats,mice”;
+	var split:string[] = source.split(“,”); // [ “Dogs”, “cats”, “rats”, “mice” ]
+
+	var source = “Dogs,cats,rats,mice”;
+	var split:string[] = source.split(“rats,”); // [ “Dogs,cats,”,“mice” ];
+{% endhighlight %}
+
+
+'Iterating' through an array
+----------------------------------
+
+{% highlight javascript %}
+	var myArray = [ 2, 4, 6, 8, 10 ];
+	for(var i =o; i , myArray.length; i++) {
+		var itemAtIndex = myArray[i];
+		console.log(itemAtIndex);
+	}
+{% endhighlight %}
+
+Summing up items in an array
+-------------------------------------
+
+{% highlight javascript %}
+	var sum = 0;
+	var myArray:number[] = [ 2, 4, 6, 8, 10 ];
+	for(var i =o; i , myArray.length; i++) {
+		var itemAtIndex = myArray[i];
+		sum += itemAtIndex;
+	}
+{% endhighlight %}
+
+Searching Arrays
+----------------------------------------
+
+
+{% highlight javascript %}
+	var myArray:string[] = [ “Spock”, “Kirk”, “McCoy”, “Luffy” ];
+	var thingToLookFor = “Luffy”;
+
+	for(var i =0; i < myArray.length; i++) {
+		var itemAtIndex = myArra[i];
+		if( itemAtIndex == thingToLookFor) {
+			break;
+		}
+	}
+{% endhighlight %}
+
+Drawing with arrays
+----------------------------------------
+
+Awesome, so we can store data in our array. All of our drawing is just numbers driving our drawings too. So now we have a way to store data about lots of all drawings. Here's some examples:
+
+Boxes of different sizes!
+-----------------------------------------
+
+{% highlight javascript %}
+var boxSizes:number[] = [10, 20, 30, 100];
+
+for(var i:number = 0; i < boxSizes.length; i++) {
+	var currentSize:number = boxSizes[i];
+	drawing.lineStyle(1, 0x0000FF, 1);
+	drawing.drawRect(0,0, currentSize, currentSize);
+}
+
+{% endhighlight %}
+
+
+The colors!
+------------------------------------------
+
+{% highlight javascript %}
+var colors:number[] = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF, 0xFF00FF];
+
+for(var i:number = 0; i < boxSizes.length; i++) {
+	var currentColor:number = colors[i];
+	drawing.beginFill(currentColor);
+	drawing.drawRect(i*50, 0, 50, 200);
+}
+
+{% endhighlight %}
+
+
+Snaaaaaaaake
+------------------------------------------
+
+This one makes use of push and pop, and something called an **parallel array**
+
+Parallel arrays are simple, really. They are two arrays where the each entry in one array is related to an entry in the second array at every index. So, here's an example:
+
+
+{% highlight javascript %}
+var positionsX:number[] = [10, 50, 99];
+var positionsY:number[] = [1, 22, 45];
+{% endhighlight %}
+
+These two arrays are storing the points : (10,1),  (50,22), (99,45). The way the access them in code is like such:
+
+{% highlight javascript %}
+var positionsX:number[] = [10, 50, 99];
+var positionsY:number[] = [1, 22, 45];
+
+for(var i:number = 0; i < positionsX.length; i++) {
+	console.log( positionsX[i], positionsY[i] );
+}
+{% endhighlight %}
+
+
+
+Great! Now, let's use those to make a snake that follows our mouse. (This assumes we have our animation code again)
+
+
+
+{% highlight javascript %}
+var positionsX:number[] = [];
+var positionsY:number[] = [];
+
+//initialize the arrays to have 50 zeroes in them
+for(var i:number = 0; i < 50; i++) {
+	positionsX[i] = 0;
+	positionsY[i] = 0;
+}
+
+function draw() {
+	//clear drawing
+	//Oh yeah, that was the best comment ever.
+	drawing.clear();
+
+	var mousePosition:PIXI.Point = stage.getMousePosition();
+
+	//add new position
+	positionsX.push(mousePosition.x);
+	positionsY.push(mousePosition.y);
+
+	//remove oldest position
+	positionsX.unshift();
+	positionsY.unshift();
+
+	//draw our positions!
+	for(var i:number = 0; i < positionsX.length; i++) {
+		drawing.beginFill(0xFF0000);
+		drawing.drawCircle(positionsX[i], positionsY[i], i*2);
+	}
+
+}
+{% endhighlight %}

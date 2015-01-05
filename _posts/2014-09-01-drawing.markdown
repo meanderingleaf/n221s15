@@ -1,0 +1,160 @@
+---
+layout: post
+title:  "Drawing"
+date:   2014-09-02 03:24:54
+categories: update
+---
+
+Drawing using Pixi.js
+-------------------------
+
+Pixi.js is a *javascript library* that is used to draw to something called the *canvas* (we'll be working with the canvas even more later). It lets us create (and animate) visual elements with relative ease. To get running with it we need to understand a few things about color and how the computer displays graphics.
+
+
+Positioning
+--------------------------
+
+When working with positioning in computer code, you most often will be working in units of **pixels**. The *upper left corner* of the screen will be pixel [0,0].
+
+*X increases* as you go further right on the screen.
+
+*y increases* as you go further down the screen.
+
+So, if you have a screen that is 800x600 pixels, a point in the middle of it would be [400,300].
+
+Color
+-----------------------------
+
+Color, in pixi, is set using *hexadecimal*. We're not going to go into how to convert the colors manually. Just know that if you want a specific color you will need to look it up, either using photoshop or a tool online.
+
+*Some color examples*
+
+- **Red:** 0xFF0000
+- **Green:** 0x00FF00
+- **Blue:** 0x0000FF
+- **White:** 0xFFFFFF
+- **Black:** 0x000000
+
+Drawing
+------------------------------
+
+AKA 'this is where the magic lives'. Let's get through the drawing setup first. **Assuming you have pixi.js and pixi.d.ts in your src folder**
+
+**Setup code**
+
+Really at this point you should just copy and paste and gloss over the details of this particular code section.
+
+{% highlight javascript %}
+///<reference path="PIXI.d.ts"/>
+
+var renderer = new PIXI.WebGLRenderer(800, 600);
+var stage    = new PIXI.Stage(0x000000);
+document.body.appendChild(renderer.view);
+
+animate();
+function animate() {
+    renderer.render(stage);
+    requestAnimationFrame(animate);
+}
+
+//Your code here
+
+var drawing:PIXI.Graphics = new PIXI.Graphics();
+stage.addChild(drawing);
+
+{% endhighlight %}
+
+(All of your drawing code will be done with the *drawing* variable there, so make sure its spelling correctly)
+
+
+Filling
+---------------------------
+
+Before we get to making our first mark, it might help to learn how to change the color of what we'll be drawing. This is done with **beginFill**
+
+{% highlight javascript %}
+drawing.beginFill(0x00FF00); //begins a green fill
+
+drawing.beginFill(0xFF0000); //begins a red fill
+
+drawing.beginFill(0x0000FF); //begins a blue fill
+{% endhighlight %}
+
+This will change the color of **any drawing we do after we begin a fill**
+
+
+Drawing a circle
+---------------------------
+
+Let's start with the easiest of the shapes: a circle (which is also perhaps the most pondersome of shapes in the grand scheme of things).
+
+Here's the basics of a circle:
+
+{% highlight javascript %}
+drawing.drawCircle(xPosition, yPosition, radius);
+{% endhighlight %}
+
+So, if we wanted a fairly large, blue circle around the center of an average screen size, we migh write some code like this:
+
+{% highlight javascript %}
+drawing.beginFill(0x0000FF); //begins a blue fill
+drawing.drawCircle(600, 400, 150);
+{% endhighlight %}
+
+Let's draw two circles of different colors
+
+
+{% highlight javascript %}
+drawing.beginFill(0x0000FF); //begins a blue fill
+drawing.drawCircle(600, 400, 150);
+
+drawing.beginFill(0xFF0000); //begins a red fill
+drawing.drawCircle(100, 400, 150);
+{% endhighlight %}
+
+
+Drawing a rectangle
+-------------------------------
+
+Rectangles take four arguments to their method call. Here's the prototype:
+
+{% highlight javascript %}
+drawing.drawRect(topX, topY, width, height);
+{% endhighlight %}
+
+So, here's a fairly long and thin rectangle that starts in the upper left corner of the screen.
+
+{% highlight javascript %}
+drawing.beginFill(0x000000); //black because nighttime rectangles are scary.
+drawing.drawRect(0, 0, 1200, 15);
+{% endhighlight %}
+
+Drawing lines
+-----------------------------------
+
+Lines are a bit different than shapes (of course!)
+
+Imagine drawing a line as such: you have a pencil on the paper, and you can do either two things:
+
+1. Keep the pencil on the paper and draw to another position
+2. Pick the pencil up and draw to another position
+
+This is how drawing lines works. (Note your 'digital pencil' always starts in the upper lefthand corner).
+
+{% highlight javascript %}
+drawing.lineTo(100, 100); //draws from 0,0 to 100,100
+
+drawing.moveTo(200, 0); //does not draw, but the next 'lineTo' will start at 200,0;
+drawing.lineTo(200,100); //draws a line straight down from 200,0
+{% endhighlight %}
+
+
+Changing your lines
+-----------------------------------
+
+Much like our shapes, we can change our lines with a few methods:
+
+{% highlight javascript %}
+drawing.lineColor(0x00FF00); //a green line
+drawing.lineWidth(20); //a freakin' big line will be drawn after this call
+{% endhighlight %}

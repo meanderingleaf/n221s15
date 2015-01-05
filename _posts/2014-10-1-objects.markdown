@@ -1,0 +1,192 @@
+---
+layout: post
+title:  "Objects"
+date:   2014-10-1 03:24:54
+categories: update
+---
+
+
+Objects
+----------
+
+Objects are a way of storing a set of related variables that are a different, but associated with each other. Typically they are used to model something. Here is an example, in english.
+
+We might make an object to describe a chair. It would have a set number of traits:
+
+- a height
+- a color
+- a weight
+- a number of legs
+- perhaps a number of wheels
+
+And onward.
+
+
+Making an object
+--------------------------------
+
+Here is that same object, in Typescript.
+
+
+{% highlight javascript %}
+	var someChair = {
+		height: 23,
+		color: 0xFF0000,
+		weight: 10,
+		numLegs: 4
+	};
+{% endhighlight %}
+
+
+Some things to note: objects are enclosed in *culry brackets*, and they are a set of name: value pairs, seperated by commas.
+
+Access object properties
+------------------------
+
+Use a **dot**.
+
+{% highlight javascript %}
+	var someChair = {
+		height: 23,
+		color: 0xFF0000,
+		weight: 10,
+		numLegs: 4
+	};
+
+	console.log(someChair.height); //23
+	console.log(someChair.weight); //23
+{% endhighlight %}
+
+
+And yes, properties work just like variables too
+
+{% highlight javascript %}
+	var someChair = {
+		height: 23,
+		color: 0xFF0000,
+		weight: 10,
+		numLegs: 4
+	};
+
+	someChair.height = 10; //smaller chair
+	
+{% endhighlight %}
+
+
+
+Classes -  easily making mulitple objects
+------------------------------
+
+Objects are great for modeling a singular thing. If you want to make multiple of some object, it makes more sense to move on to a class.
+
+Let's make a chair class, because we're not very creative.
+
+
+{% highlight javascript %}
+class Chair {
+	
+	height:number;
+	color:number;
+	weight:number;
+	numLegs:number;
+
+}
+{% endhighlight %}
+
+
+A class is just a specification for an object, however. If we want to make an actual version of it, we need to make an *instance* of that class.
+
+Some nomenclature: variables that exist within a class are called **properties**.
+
+Making an instance of a class
+----------------------------------------
+
+1. Use the *new* keywork
+2. Write the name of the class
+3. Put paranthesis after the name
+
+{% highlight javascript %}
+class Chair {
+	
+	height:number;
+	color:number;
+	weight:number;
+	numLegs:number;
+
+}
+
+var someChair = new Chair();
+someChair.height = 23;
+someChair.color = 0xFF0000;
+someChair.weight = 12;
+
+{% endhighlight %}
+
+Constructing a class
+----------------------------------
+
+
+Sometimes it makes more sense to provide a series of values that the class will put into its properties by default.
+A constructor is a function (called a **method** when it appears inside of a class), that is run right when the class is instantiated (this happens when you see the **new** keyword).
+
+In this case, we take a bunch of values, and store them in the class' properties.
+
+{% highlight javascript %}
+
+class Chair {
+
+	height:number;
+	color:number;
+	weight:number;
+	numLegs:number;
+
+	constructor(theHeight:numbr, theColor:number, theWeight:number, theLegs:number) {
+        this.height = theHeight;
+        this.color = theColor;
+        this.weight = theWeight;
+        this.numLegs = theLegs;
+    }
+
+}
+
+var someChair = new Chair(23, 0xFF0000, 10, 4);
+
+console.log(someChair.height); //23
+{% endhighlight %}
+
+
+Using a class for a bouncing ball
+----------------------------------------
+
+{% highlight javascript %}
+
+class Ball {
+
+	x:number;
+	y:number;
+	radius:number;
+	color:number;
+	velocityX:number;
+	velocityY:number;
+
+	constructor(theX:number, theY:number, theRadius:number, theColor:number, theVelocityX:number, theVelocityY) {
+        this.x = theX;
+        this.y = theY;
+        this.radius = theRadius;
+        this.color = theColor;
+        this.velocityX = theVelocityX;
+        this.velocityY = theVelocityY;
+    }
+
+}
+
+var velocity = {
+	x: 1,
+	y: 1
+};
+
+var oneBall = new Ball(100, 100, 50, 0x00FF00, velocity, 1, 1);
+
+
+
+{% endhighlight %}

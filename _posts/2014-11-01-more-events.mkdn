@@ -1,0 +1,207 @@
+---
+layout: post
+title:  "More Events"
+date:   2014-11-01 03:24:54
+categories: update
+---
+
+More events than usual
+---------------------------
+
+Inputs
+---------------------------
+
+Inputs are another way to get responses from users. These are the 'form elements' one is used to seeing all over the web.
+
+Some major ones:
+
+- Text fields
+
+{% highlight javascript %}
+<input id='someId'></input>
+{% endhighlight %}
+
+- Buttons
+
+{% highlight javascript %}
+<input id='someId' type='button' value='Click me!'></input>
+{% endhighlight %}
+
+
+- Selects
+
+{% highlight javascript %}
+<select id='someId'>
+	<option value="hamburger">Hamburger</option>
+	<option value="hotdog">Hotdog</option>
+</select>
+{% endhighlight %}
+
+
+Some other, fun ones (that we may or may not cover in class):
+
+- Date pickers
+- Sliders
+
+Accessing input values in javascript
+--------------------------
+
+Using the **value** property
+
+{% highlight javascript %}
+var someInputReference = document.getElementById('myInput');
+console.log(someInputReference.value);
+{% endhighlight %}
+
+
+Works with selects and inputs, our two major players.
+
+Buttons
+--------------------------
+
+- Are, of course, good for clicking
+- Which makes them really good for... mouse events.
+
+{% highlight javascript %}
+<input type='button' id='myButton' value='Click me'></input>
+<script>
+	var buttonRef = document.getElementById('myButton');
+
+	myButton.addEventListener('click', function(event) {
+		//This runs whenever our button is clicked
+		//In programmer terms that is 'neat'
+	})
+</script>
+{% endhighlight %}
+
+
+Validation
+---------------------------
+
+One nice way to use Javascript and forms is to validate user inputs.
+
+Forms
+--------------------------
+
+Before we can validate, we need to know about the form tag.
+The **form tag** is a tag we can wrap inputs with that both can be used to submit data. If we give this tag an id, we can explicitly dissallow the form from being submitted if the user entered bad inputs.
+
+{% highlight javascript %}
+<!-- for testing purposes, this is set to 'google', but really should be a backend script -->
+<form action="www.google.com" id="myForm">
+	<input id="userName"></input>
+	<input id="zip"></input>
+	<input id="email"></input>
+	<input id="phone"></input>
+	<input type="submit" value="submit" />
+</form>
+{% endhighlight %}
+
+
+Listening for a form submission
+---------------------------
+
+{% highlight javascript %}
+myForm.addEventListener('submit', function(event) {
+	//This runs whenever the form is 'submmitted'
+})
+{% endhighlight %}
+
+
+Stopping an event from doing what is usually does
+---------------------------
+
+Many events do something by default (click events on links will navigate to urls, submmitting a form will move to the next page)
+
+We can, however, choose to 'interrupt' that event and stop it from doing what it would normally do with:
+
+{% highlight javascript %}
+event.preventDefault();
+{% endhighlight %}
+
+
+Validating if things are textual or numeric
+--------------------------
+
+**isNaN**: returns true if something is not a number
+
+{% highlight javascript %}
+isNaN("Hello") //true
+isNaN(5) //false
+isNaN("5") //false
+{% endhighlight %}
+
+
+Validating length
+---------------------------
+
+Use the .length property of a string
+
+{% highlight javascript %}
+myInput.value.length != 5 //for zip codes
+{% endhighlight %}
+
+
+The start of form validation
+---------------------------
+
+{% highlight javascript %}
+myForm.addEventListener('submit', function(event) {
+				
+	var formIsValid = true;
+
+	//check name
+	if( !isNaN(userName.value) ) {
+		formIsValid = false;
+	}
+
+
+	//check zip
+	if( isNaN(zip.value) || zip.value.length != 5) {
+		formIsValid = false;
+	}
+
+
+	if(!formIsValid) {
+		event.preventDefault();
+    	return false;
+	}
+})
+{% endhighlight %}
+
+
+Sound
+---------------------------
+
+Getting sound into our web pages isn't too hard, use the audio tag
+
+{% highlight javascript %}
+<audio id="myAudio">
+  <source src="horse.wav" type="audio/wav">
+  <source src="horse.mp3" type="audio/mpeg">
+</audio>
+{% endhighlight %}
+
+
+Note that there can be more than one file per audio element. This is because there is no single format supported by all browsers.
+
+Playing a sound
+----------------------------
+
+{% highlight javascript %}
+var myAudio = document.getElementById('myAudio');
+myAudio.play();
+{% endhighlight %}
+
+
+Listening for sound events
+----------------------------
+
+There's more to life than mouse events.
+Let's listen for when a sound ends:
+
+{% highlight javascript %}
+myAudio.addEventListener('ended', function(event) {
+	//Sound is over.
+})
+{% endhighlight %}

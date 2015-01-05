@@ -1,0 +1,179 @@
+---
+layout: post
+title:  "Events"
+date:   2014-10-25 03:24:54
+categories: update
+---
+
+Events
+====================
+
+Events are e-verywhere
+---------------------------------
+
+
+Just about everything in the html/javascript world sends out these wonderful things called events
+
+What sends events?
+
+- The mouse
+- The keyboard
+- All of the visible elements
+- And more
+
+What is an event
+-------------------------
+
+An **event** is a way for the computer to inform an application or part of the application that something has happened, without it specifically having to ask all the time.
+
+Event examples
+--------------------------
+
+- Click on an input: click event
+- Type 'some stuff': Keyup and keydown events
+- Move mouse over and out of divs: mouse over and mouse out events
+
+Some other events
+---------------------------
+
+- Image loaded
+- Sound has finished playing
+- Page has loaded
+- Mouse has moved
+
+addEventListener
+-------------------------
+
+- In order to know when an event has happened, we need to *listen* for that event
+- To listen for an event, use **addEventListener** (this is, in general, a method of DOMElements)
+
+
+The process
+----------------------
+
+
+There is two parts to dealing with events:
+
+- The **event listener**: this is a method on every DOM element reference
+- The **event handler**: this is a function that runs whenever the event 'fires'
+
+
+Examples
+------------------------
+
+
+Assigning an event listener via html
+-------------------------------------------
+
+{% highlight html %}
+<div id="myDiv" onClick="handleClick(event)"></div>
+{% endhighlight %}
+
+{% highlight javascript %}
+function handleClick(event) { 
+	console.log("I've been hit!!"); 
+}
+{% endhighlight %}
+
+
+On an image
+---------------------------------------
+
+{% highlight html %}
+<img id="myImg" src="assets/someImage/jpg" click="onMouseClick(event)"/>
+{% endhighlight %}
+
+
+{% highlight javascript %}
+function handleClick(event) { 
+	console.log("I've been hit!!"); 
+}
+{% endhighlight %}
+
+Event listeners in just javascript
+----------------------------------------
+
+{% highlight javascript %}
+var divRef = document.getElementById("myDiv");
+divRef.addEventListener("mouseover", onMouseOver); 
+
+function onMouseOver(event) { 
+	console.log("I've been found!"); 
+}
+{% endhighlight %}
+
+
+
+Click event in just code
+----------------------------------------
+
+{% highlight javascript %}
+var someDiv = document.getElementById("myDiv");
+someDiv.addEventListener("click", onMouseClick); 
+
+function onMouseClick(event):void { 
+	console.log("I've been hit!!"); 
+}
+{% endhighlight %}
+
+Some gotchas
+---------------------------
+
+{% highlight javascript %}
+domRef.addEventListener("mouseover", onMouseOver); 
+
+function onMouseOver(event) { 
+	trace("I've been found!"); 
+}
+{% endhighlight %}
+
+Note that the second argument to addEventListener is simply the *name* of the function
+
+In other words, do not use () when doing an addEventListener call
+
+
+Removing event listeners
+------------------------------
+
+In order to stop listening for events, we call the reverse of addEventListener, removeEventListener
+
+{% highlight javascript %}
+domRerference.removeEventListener("mouseover", onMouseOver);
+{% endhighlight %}
+
+Event target
+-----------------------
+
+- All events have a 'target'
+- Targets are, in general, the item that was listening for the event
+- For instance, inside of a mouse event click handler on a div, you may get a reference to the div that was clicked
+
+
+{% highlight javascript %}
+function onBananaClick(event) {
+	//this is a *reference* to the DIV/whatever that was clicked
+	var targDiv = event.target;
+}
+{% endhighlight %}
+
+
+Events
+---------------
+
+[A listing of all events and supported browsers.](http://www.quirksmode.org/dom/events/index.html)
+
+Adding events to new objects
+-----------------------------
+
+{% highlight javascript %}
+var newElement = document.createElement("div");
+newElement.width = "100px";
+newElement.height = "100px";
+newElement.color = "#FF0000";
+
+newElement.addEventListener("click", function(event) {
+	console.log("its been clicked!"");
+});
+
+domReference.appendChild(newElement);
+{% endhighlight %}
