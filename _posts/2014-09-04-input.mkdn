@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "Input"
+date:   2014-09-04 03:24:54
+categories: update
+---
+
+
+Inputs
+---------------
+
+We'll cycle back to inputs at a later class date, but here's the quick basics of inputs.
+
+
+We'll be working with two basic kinds of inputs throughout much of this class. 
+
+Text Inputs
+------------------------
+
+The first is this, boring, textual input:
+
+{% highlight html %}
+<input id="txtPuppies" />
+{% endhighlight %}
+
+To get a reference to this input in our javascript, we would then write this
+
+{% highlight javascript %}
+var txtPuppies = document.getElementById("txtPuppies");
+{% endhighlight %}
+
+To get the text that a user has typed into that input, we would use the **.value** property of the reference.
+
+{% highlight javascript %}
+var txtPuppies = document.getElementById("txtPuppies");
+
+console.log(txtPuppies.value);//whatever is 
+{% endhighlight %}
+
+
+Buttons
+----------------------------------
+
+A second 'input' we will use with startling regularity is the button.
+
+{% highlight html %}
+<input id="btnDosomething" type="button" value="Click here if you dare!"/>
+{% endhighlight %}
+
+
+TO respond to clicks, we would then write this code
+
+{% highlight javascript %}
+document.getElementById("btnDosomething").onclick = function() {
+	console.log("You clicked it, didn't you?");	
+}
+{% endhighlight %}

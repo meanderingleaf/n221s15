@@ -19,7 +19,7 @@ Variables store values. That is it. (Values, of course, can be a lot of things, 
 Type the keyword `var`, the name of the var, a *colon*, and then a *variable type*.
 
 {% highlight javascript %}
-var myVar:any;
+var myVar;
 {% endhighlight %}
 
 __Putting stuff into variables__
@@ -37,27 +37,21 @@ __Variable Types__
 
 We're going to be working with three major variable types, to begin with, but you will quickly see that there is a plethora of variables out in the *Real World*.
 
-All of your variables in this class *must have a type*. A type defines what the variable is. In order to specify a type, you write the name of the type after the colon. For instance, to make a variable a number type, we would write this:
-
-{% highlight javascript %}
-var showingTypes:number;
-{% endhighlight %}
-
 *Numbers*
 ----------------------------
 
 These store.. numbers.
 
 {% highlight javascript %}
-var first:number = 10;
+var first = 10;
 {% endhighlight %}
 
 All sorts of numbers
 
 {% highlight javascript %}
-var another:number = 5.66;
-var pewPew:number = 1000000000000000;
-var yougetthepoint:number = 0.45;
+var another = 5.66;
+var pewPew = 1000000000000000;
+var yougetthepoint = 0.45;
 {% endhighlight %}
 
 
@@ -65,7 +59,7 @@ var yougetthepoint:number = 0.45;
 -------------------------------------
 
 {% highlight javascript %}
-var another:string = 'Hello world!';
+var another = 'Hello world!';
 {% endhighlight %}
 
 *A note on strings* in order to write strings in code you *must use* either the double quotes "  or single quote ', opening and closing the string with the same for the whole string.
@@ -80,8 +74,8 @@ Strings made in code like this are called **string literals**.
 Store **true** or **false**.
 
 {% highlight javascript %}
-var isCold:Boolean = false;
-var isWarm:Boolean = true;
+var isCold = false;
+var isWarm = true;
 {% endhighlight %}
 
 
@@ -91,23 +85,23 @@ Operands
 You can do more with variables than just assign single values.
 
 {% highlight javascript %}
-var a:number = 4;
-var b:number = 2;
+var a = 4;
+var b = 2;
 
 //addition
-var c:number = a + b; //6
+var c = a + b; //6
 
 //subtraction
-var d:number = a - b; // 2
+var d = a - b; // 2
 
 //multiplication
-var e:number = a * b; //8
+var e = a * b; //8
 
 //division
-var f:number = a / b; //2
+var f = a / b; //2
 
 //modulo
-var g:number = a % b; // 0
+var g = a % b; // 0
 {% endhighlight %}
 
 Modulo
@@ -132,7 +126,7 @@ Incrementing/Decrementing
 ------------------------------
 
 {% highlight javascript %}
-var a:number = 5;
+var a = 5;
 
 //incrementing
 a = a + 1; //a == 6
@@ -151,7 +145,7 @@ Incrementing/Decrementing/other shorthand
 -----------------------------
 
 {% highlight javascript %}
-var a:number = 5;
+var a = 5;
 
 //incrementing
 a += 1; //a == 6
@@ -172,9 +166,9 @@ String Concatenation
 One can also use the plus sign to add strings together. This is called **String concatenation**.
 
 {% highlight javascript %}
-var first:string = "Hello";
-var last:string = "World";
-var else:string = first + last; //'HelloWorld';
+var first = "Hello";
+var last = "World";
+var else = first + last; //'HelloWorld';
 {% endhighlight %}
 
 Question - why no space between the hello and world in the result?
@@ -185,7 +179,7 @@ Logging
 Logging lets you see the value of variables in the developer console. Here's an example:
 
 {% highlight javascript %}
-var someVar:string = "Hello";
+var someVar = "Hello";
 console.log(someVar);
 {% endhighlight %}
 
@@ -237,7 +231,7 @@ Function arguments
 **Argument Example**
 
 {% highlight javascript %}
-function sayHelloName(name:string) {
+function sayHelloName(name) {
 	//name is now a variable in this function
 	//we can do anything we want with it
 
@@ -266,7 +260,7 @@ Multiple arguments
 {% highlight javascript %}
 
 //the function
-function sayHelloSalutation(salutation:string, name:string) {
+function sayHelloSalutation(salutation, name) {
 	console.log(salutation + " " + name +"!")
 }
 
@@ -274,11 +268,6 @@ function sayHelloSalutation(salutation:string, name:string) {
 sayHelloSalutation("What's up", "Dan");
 
 {% endhighlight %}
-
-Now is a good time to make a similar function to the one above and call it
---------------------------------------------
-
-Don't you think?
 
 
 Function returns
@@ -296,7 +285,7 @@ function makeHello() {
 //use the function
 var aHello = makeHello(); //a hello now contains 'hello'
 //this would do the same thing as above
-var aHello:string = "Hello";
+var aHello = "Hello";
 {% endhighlight %}
 
 Complex function usage
@@ -311,7 +300,7 @@ function generateHello(salutation, name) {
 
 //use the function
 
-var ourHello:string = generateHello("Hey there", "Dave");
+var ourHello = generateHello("Hey there", "Dave");
 console.log(ourHello);
 {% endhighlight %}
 
@@ -401,3 +390,28 @@ Inside any function, change its *innerHTML*
 var output = document.getElementById('output');
 output.innerHTML = "Hello!";
 {% endhighlight %}
+
+
+Simplfying a circle drawing
+--------------------------------------------------------
+
+Okay, let's be honest, drawing a circle sucks. Let's make a function that takes some of the pain out of the process:
+
+{% highlight javascript %}
+function fillCircle(x, y, radius) {
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, Math.PI * 2);
+	ctx.closePath();
+	ctx.fill();
+}
+{% endhighlight %}
+
+
+And now, to use this function:
+
+{% highlight javascript %}
+ctx.fillStyle = "#00FF00";
+fillCircle(10, 10, 30); //draws a circle for us.
+fillCircle(20, 20, 20); //draws another circle for us
+{% endhighlight %}
+

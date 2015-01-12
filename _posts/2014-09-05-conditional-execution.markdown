@@ -22,32 +22,32 @@ Less than
 ---------------------------------------------
 
 {% highlight javascript %}
-var resultOne:bool = 5 < 7; //true
-var resultTwo:bool = 7 < 5; //false
+var resultOne = 5 < 7; //true
+var resultTwo = 7 < 5; //false
 {% endhighlight %}
 
 Greater than
 ----------------------------------------------
 
 {% highlight javascript %}
-var resultOne:bool = 5 > 7; //false
-var resultTwo:bool = 7 > 5; //true
+var resultOne = 5 > 7; //false
+var resultTwo = 7 > 5; //true
 {% endhighlight %}
 
 Equal to
 -----------------------------------------------
 
 {% highlight javascript %}
-var resultOne:bool = 5 == 5; //true
-var resultTwo:bool = 7 == 5; //false
+var resultOne = 5 == 5; //true
+var resultTwo = 7 == 5; //false
 {% endhighlight %}
 
 Not equal to
 -----------------------------------------------
 
 {% highlight javascript %}
-var resultOne:bool = 5 != 5; //false
-var resultTwo:bool = 7 != 5; //true
+var resultOne = 5 != 5; //false
+var resultTwo = 7 != 5; //true
 {% endhighlight %}
 
 The if statement
@@ -201,140 +201,106 @@ Let's take a look at one of the functions in our code that we just.. glossed ove
 {% highlight javascript %}
 	animate();
 	function animate() {
-	    renderer.render(stage);
+
 	    requestAnimationFrame(animate);
-	}
-{% endhighlight %}
-
-Actually let's stay far away from it. Edit it so it looks like this:
-
-{% highlight javascript %}
-	animate();
-	function animate() {
-		draw(); //new line
-	    renderer.render(stage);
-	    requestAnimationFrame(animate);
-	}
-{% endhighlight %}
-
-
-Now we can make a draw function with the rest of our code and life will just be so much better. So. Let's animate.
-
-
-{% highlight javascript %}
-	function draw() {
-		//get rid of our old drawing.
-		drawing.clear();
-
-		//draw our new stuff
-		drawing.beginFill(0x000000);
-		drawing.drawCircle(0,0,100);
 	}
 {% endhighlight %}
 
 Okay, this is sorta boring. But now that we can clear the stage and redraw it becomes easy to get some animation into our program by changing the value of a variable outside of the scope of funcion and using that value to control the position of the circle.
 
+(this assumes we have our 'fillCircle' function in the script as well.)
+
 {% highlight javascript %}
 
-	var xPosition:number = 0;
+	var xPosition = 0;
 
-	function draw() {
+	animate();
+	function animate() {
 		//get rid of our old drawing.
-		drawing.clear();
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 		//draw our new stuff
-		drawing.beginFill(0x000000);
-		drawing.drawCircle(xPosition,0,100);
+		ctx.fillStyle = "#FF0000";
+		fillCircle(xPosition,0,100);
 
 		xPosition = xPosition + 1;
+		requestAnimationFrame(animate);
 	}
 {% endhighlight %}
 
 Great, now we have a circle moving to the right. We'll come back to this a bit later to make it more.. fun. For now, let's use our if statements for a bit of easy drawing.
 
 
-Getting mouse position
+Using buttons to control an animated drawing
 ---------------------------------------------
 
-Use stage.getMousePosition();
+First, the HTML
 
-Store the result in a variable with type PIXI.Point.
-
-{% highlight javascript %}
-
-	var xPosition:number = 0;
-
-	function draw() {
-		//get rid of our old drawing.
-		drawing.clear();
-
-		//get the mouse position
-		var mousePosition:PIXI.Point = stage.getMousePosition();
-
-		//show mouse position on console
-    	console.log(mousePosition.x, mousePosition.y);
-	}
-
+{% highlight html %}
+<input type="button" id="btnLeft" value="left" /> <input type="button" id="btnRight" value="right" />
+<canvas id="myCanvas" width="800" height="600"></canvas>
 {% endhighlight %}
 
 
-
-Using mouse position to control things on the screen
-------------------------------------------------
-
-CHanging color and position based on the x-position of the mouse.
+Then, the Javascript
 
 {% highlight javascript %}
+	var xPosition = 0;
 
-	var xPosition:number = 0;
-
-	function draw() {
-		//get rid of our old drawing.
-		drawing.clear();
-
-		//get the mouse position
-		var mousePosition:PIXI.Point = stage.getMousePosition();
-
-		if(mousePosition.x < 100 && mousePosition.y < 100) {
-			drawing.beginFill(0xFF0000);
-			drawing.drawRect(0,0,100,100);
-		} else {
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(0,0,400,400);
-		}
+	document.getElementById('btnLeft').onclick = function() {
+		xPosition -= 10;
 	}
 
+	document.getElementById('btnRight').onclick = function() {
+		xPosition += 10;
+	}
+
+	animate();
+	function animate() {
+		//get rid of our old drawing.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		//draw our new stuff
+		ctx.fillStyle = "#FF0000";
+		fillCircle(xPosition,0,100);
+
+		xPosition = xPosition + 1;
+		requestAnimationFrame(animate);
+	}
 {% endhighlight %}
 
 
-Using complex conditionals to highlight corners
------------------------------------------------
+Using if statments with the animation
+---------------------------------
+
+Let's change the drawing so its got different colors based on the side its on.
+We're going to focus on only the drawing portion of the code, this time.
 
 {% highlight javascript %}
+function animate() {
+	//get rid of our old drawing.
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	var xPosition:number = 0;
-
-	function draw() {
-		//get rid of our old drawing.
-		drawing.clear();
-
-		//get the mouse position
-		var mousePosition:PIXI.Point = stage.getMousePosition();
-
-
-		if(mousePosition.x < 100 && mousePosition.y < 100) { //upper left
-			drawing.beginFill(0xFF0000);
-			drawing.drawRect(0,0,100,100);
-		} else if (mousePosition.x < 100 && mousePosition.y > 100 { //lower left
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(0,100,100,100);
-		} else if(mousePosition.x > 100 && mousePosition.y < 100) { // upper right
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(100,0,100,100);
-		} else if(mousePosition.x > 100 && mousePosition.y > 100) { // lower right
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(100,100,100,100);
-		}
+	//draw our new stuff
+	if(xPosition < 400) {
+		//red on left
+		ctx.fillStyle = "#FF0000";
+	} else {
+		//blue on the right
+		ctx.fillStyle = "#0000FF";
 	}
+	fillCircle(xPosition,0,100);
 
+	xPosition = xPosition + 1;
+	requestAnimationFrame(animate);
+}
 {% endhighlight %}
+
+
+Some challenges
+-------------------------------
+
+How do you change the above code so:
+	1. The circle is colored green on the middle on the screen (between 300 and 500)
+	2. The circle can up and down
+	3. Once the circle can go up and down, how does the code change so the circle is different colors in the four quadrants?

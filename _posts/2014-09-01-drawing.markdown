@@ -44,24 +44,16 @@ AKA 'this is where the magic lives'. Let's get through the drawing setup first. 
 
 Really at this point you should just copy and paste and gloss over the details of this particular code section.
 
+First, in your HTML, add this tag:
+{% highlight html %}
+<canvas id="myCanvas" width="800" height="600"></canvas>
+{% endhighlight %}
+
+
+Then, in your javascript, get a drawing context by adding these two lines. Yes, capitalization is important.
 {% highlight javascript %}
-///<reference path="PIXI.d.ts"/>
-
-var renderer = new PIXI.WebGLRenderer(800, 600);
-var stage    = new PIXI.Stage(0x000000);
-document.body.appendChild(renderer.view);
-
-animate();
-function animate() {
-    renderer.render(stage);
-    requestAnimationFrame(animate);
-}
-
-//Your code here
-
-var drawing:PIXI.Graphics = new PIXI.Graphics();
-stage.addChild(drawing);
-
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
 {% endhighlight %}
 
 (All of your drawing code will be done with the *drawing* variable there, so make sure its spelling correctly)
@@ -73,45 +65,36 @@ Filling
 Before we get to making our first mark, it might help to learn how to change the color of what we'll be drawing. This is done with **beginFill**
 
 {% highlight javascript %}
-drawing.beginFill(0x00FF00); //begins a green fill
+ctx.fillStyle = "#00FF00"; //begins a green fill
 
-drawing.beginFill(0xFF0000); //begins a red fill
+ctx.fillStyle = "#FF0000"; //begins a red fill
 
-drawing.beginFill(0x0000FF); //begins a blue fill
+ctx.fillStyle = "#0000FF"; //begins a blue fill
 {% endhighlight %}
 
 This will change the color of **any drawing we do after we begin a fill**
 
+Stroke color
+---------------------------------
 
-Drawing a circle
----------------------------
-
-Let's start with the easiest of the shapes: a circle (which is also perhaps the most pondersome of shapes in the grand scheme of things).
-
-Here's the basics of a circle:
+Sometimes you will only want to draw the outline of the shape. That is done with the stroke. Here is how you change a stroke color.
 
 {% highlight javascript %}
-drawing.drawCircle(xPosition, yPosition, radius);
+ctx.strokeStyle = "#00FF00"; //begins a green stroke
+
+ctx.strokeStyle = "#FF0000"; //begins a red stroke
+
+ctx.strokeStyle = "#0000FF"; //begins a blue stroke
 {% endhighlight %}
 
-So, if we wanted a fairly large, blue circle around the center of an average screen size, we migh write some code like this:
+
+Stroke width
+-------------------------------
 
 {% highlight javascript %}
-drawing.beginFill(0x0000FF); //begins a blue fill
-drawing.drawCircle(600, 400, 150);
+ctx.lineWidth = 3;
+ctx.lineWidth = 2;
 {% endhighlight %}
-
-Let's draw two circles of different colors
-
-
-{% highlight javascript %}
-drawing.beginFill(0x0000FF); //begins a blue fill
-drawing.drawCircle(600, 400, 150);
-
-drawing.beginFill(0xFF0000); //begins a red fill
-drawing.drawCircle(100, 400, 150);
-{% endhighlight %}
-
 
 Drawing a rectangle
 -------------------------------
@@ -119,14 +102,21 @@ Drawing a rectangle
 Rectangles take four arguments to their method call. Here's the prototype:
 
 {% highlight javascript %}
-drawing.drawRect(topX, topY, width, height);
+ctx.fillRect(topX, topY, width, height);
 {% endhighlight %}
 
 So, here's a fairly long and thin rectangle that starts in the upper left corner of the screen.
 
 {% highlight javascript %}
-drawing.beginFill(0x000000); //black because nighttime rectangles are scary.
-drawing.drawRect(0, 0, 1200, 15);
+ctx.fillStyle = '#000000'; //black because nighttime rectangles are scary
+ctx.fillRect(10, 10, 400, 40);
+{% endhighlight %}
+
+In case you want to draw just the outline, we replace the `fillRect` call with a `strokeRect`
+
+{% highlight javascript %}
+ctx.strokeStyle = '#FFFF00';
+ctx.strokeRect(0, 0, 150, 100);
 {% endhighlight %}
 
 Drawing lines
@@ -142,19 +132,55 @@ Imagine drawing a line as such: you have a pencil on the paper, and you can do e
 This is how drawing lines works. (Note your 'digital pencil' always starts in the upper lefthand corner).
 
 {% highlight javascript %}
-drawing.lineTo(100, 100); //draws from 0,0 to 100,100
-
-drawing.moveTo(200, 0); //does not draw, but the next 'lineTo' will start at 200,0;
+ctx.strokeStyle = '#FFFF00';
+drawing.moveTo(200, 0); //does not draw, but the next 'lineTo' will start at 200,0
+						// Your lines always need to start with a 'moveTo'
 drawing.lineTo(200,100); //draws a line straight down from 200,0
 {% endhighlight %}
 
+Drawing a circle
+---------------------------
 
-Changing your lines
------------------------------------
+Circles, while cool, are a bit complex with the basic canvas. We'll make them a bit easier soon, but for now let's look at the basic code to get them onto the screen.
 
-Much like our shapes, we can change our lines with a few methods:
+Here's the basics of a circle:
 
 {% highlight javascript %}
-drawing.lineColor(0x00FF00); //a green line
-drawing.lineWidth(20); //a freakin' big line will be drawn after this call
+ctx.beginPath();
+ctx.arc(xPosition, xPosition, radius, 0, Math.PI * 2);
+ctx.closePath();
+ctx.fill();
+{% endhighlight %}
+
+So, if we wanted a fairly large, blue circle around the center of an average screen size, we migh write some code like this:
+
+{% highlight javascript %}
+ctx.fillStyle = "#0000FF"; 
+ctx.beginPath();
+ctx.arc(400, 300, 200, 0, Math.PI * 2);
+ctx.closePath();
+ctx.fill();
+{% endhighlight %}
+
+Let's draw two circles of different colors:
+
+{% highlight javascript %}
+ctx.fillStyle = "#0000FF"; 
+ctx.beginPath();
+ctx.arc(400, 300, 200, 0, Math.PI * 2);
+ctx.closePath();
+ctx.fill();
+
+ctx.fillStyle = "#FF00FF"; 
+ctx.beginPath();
+ctx.arc(100, 400, 50, 0, Math.PI * 2);
+ctx.closePath();
+ctx.fill();
+{% endhighlight %}
+
+Clearing the canvas
+-----------------------------------
+
+{% highlight javascript %}
+ctx.clearRect(0, 0, canvas.width, canvas.height);
 {% endhighlight %}

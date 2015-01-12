@@ -177,3 +177,91 @@ newElement.addEventListener("click", function(event) {
 
 domReference.appendChild(newElement);
 {% endhighlight %}
+
+
+
+Getting mouse position
+---------------------------------------------
+
+Use stage.getMousePosition();
+
+Store the result in a variable with type PIXI.Point.
+
+{% highlight javascript %}
+
+	var xPosition:number = 0;
+
+	function draw() {
+		//get rid of our old drawing.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		//get the mouse position
+		var mousePosition:PIXI.Point = stage.getMousePosition();
+
+		//show mouse position on console
+    	console.log(mousePosition.x, mousePosition.y);
+	}
+
+{% endhighlight %}
+
+
+
+Using mouse position to control things on the screen
+------------------------------------------------
+
+CHanging color and position based on the x-position of the mouse.
+
+{% highlight javascript %}
+
+	var xPosition:number = 0;
+
+	function draw() {
+		//get rid of our old drawing.
+		drawing.clear();
+
+		//get the mouse position
+		var mousePosition:PIXI.Point = stage.getMousePosition();
+
+		if(mousePosition.x < 100 && mousePosition.y < 100) {
+			drawing.beginFill(0xFF0000);
+			drawing.drawRect(0,0,100,100);
+		} else {
+			drawing.beginFill(0x00FF00);
+			drawing.drawRect(0,0,400,400);
+		}
+	}
+
+{% endhighlight %}
+
+
+Using complex conditionals to highlight corners
+-----------------------------------------------
+
+{% highlight javascript %}
+
+	var xPosition:number = 0;
+
+	function draw() {
+		//get rid of our old drawing.
+		drawing.clear();
+
+		//get the mouse position
+		var mousePosition:PIXI.Point = stage.getMousePosition();
+
+
+		if(mousePosition.x < 100 && mousePosition.y < 100) { //upper left
+			drawing.beginFill(0xFF0000);
+			drawing.drawRect(0,0,100,100);
+		} else if (mousePosition.x < 100 && mousePosition.y > 100 { //lower left
+			drawing.beginFill(0x00FF00);
+			drawing.drawRect(0,100,100,100);
+		} else if(mousePosition.x > 100 && mousePosition.y < 100) { // upper right
+			drawing.beginFill(0x00FF00);
+			drawing.drawRect(100,0,100,100);
+		} else if(mousePosition.x > 100 && mousePosition.y > 100) { // lower right
+			drawing.beginFill(0x00FF00);
+			drawing.drawRect(100,100,100,100);
+		}
+	}
+
+{% endhighlight %}
