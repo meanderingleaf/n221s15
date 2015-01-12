@@ -129,6 +129,7 @@ This is how drawing lines works. (Note your 'digital pencil' always starts in th
 
 {% highlight javascript %}
 ctx.strokeStyle = '#FFFF00';
+ctx.beginPath();
 drawing.moveTo(200, 0); //does not draw, but the next 'lineTo' will start at 200,0
 						// Your lines always need to start with a 'moveTo'
 drawing.lineTo(200,100); //draws a line straight down from 200,0

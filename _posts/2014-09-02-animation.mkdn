@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "Animation"
+date:   2014-09-02 03:24:54
+categories: update
+---
+
+Animation
+----------------------------------------------------------
+
+Let's take a look at one of the functions in our code that we just.. glossed over before. The animate function. Technically it does a bit of voodoo behind the scenes so our eyes are going to remain semi-glossy as we continue working with it.
+
+{% highlight javascript %}
+	animate();
+	function animate() {
+
+	    requestAnimationFrame(animate);
+	}
+{% endhighlight %}
+
+Okay, this is sorta boring. But now that we can clear the stage and redraw it becomes easy to get some animation into our program by changing the value of a variable outside of the scope of funcion and using that value to control the position of the circle.
+
+(this assumes we have our 'fillCircle' function in the script as well.)
+
+{% highlight javascript %}
+
+	var xPosition = 0;
+
+	animate();
+	function animate() {
+		//get rid of our old drawing.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		//draw our new stuff
+		ctx.fillStyle = "#FF0000";
+		fillCircle(xPosition,0,100);
+
+		xPosition = xPosition + 1;
+		requestAnimationFrame(animate);
+	}
+{% endhighlight %}
+
+Great, now we have a circle moving to the right. We'll come back to this a bit later to make it more.. fun. For now, let's use our if statements for a bit of easy drawing.
