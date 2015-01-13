@@ -55,3 +55,19 @@ document.getElementById("btnDosomething").onclick = function() {
 	console.log("You clicked it, didn't you?");	
 }
 {% endhighlight %}
+
+
+Resetting Inputs
+-----------------------------------
+
+Sometimes its helpful to remove the text inside an input. Here is how one goes about "resetting" an input.
+
+{% highlight html %}
+<input id="txtPuppies" />
+{% endhighlight %}
+
+{% highlight javascript %}
+var txtPuppies = document.getElementById("txtPuppies");
+
+txtPuppies.value = ""; //sets the text inside of txtPuppies to.. nothing.
+{% endhighlight %}
