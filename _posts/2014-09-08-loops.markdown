@@ -100,24 +100,24 @@ Drawing with loops can be rather fun if you play with the *iterator*.
 
 {% highlight javascript %}
 for(var i:number = 0; i < 10; i++) {
-	drawing.beginFill(OxFF0000, i/10);
-	drawing.drawCircle(200, 200, i* 200);
+	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+	fillCircle(200,200,i* 200);
 }
 {% endhighlight %}
 
 **staircase**
 
 {% highlight javascript %}
-drawing.beginFill(OxFF0000);
+ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 for(var i:number = 0; i < 10; i++) {
-	drawing.drawCircle(i*20, i*20, 20, 20);
+	ctx.fillRect(i*20, i*20, 20, 20);
 }
 {% endhighlight %}
 
 **targeting**
 
 {% highlight javascript %}
-drawing.lineStyle(1, 0x000000, 1);
+ctx.strokeStyle = "#0000FF"; //begins a blue stroke
 for(var i:number = 0; i < 10; i++) {
 	drawing.drawCircle(0, 0, i*20, i*20);
 }
@@ -149,7 +149,7 @@ Using Math.round.
 (You could also using Math.ceil to always round up, or Math.floor to always round down)
 
 {% highlight javascript %}
-var betweenZeroAndFive:number = Math.round(Math.random() * 5);
+var betweenZeroAndFive = Math.round(Math.random() * 5);
 {% endhighlight %}
 
 
@@ -160,17 +160,18 @@ Circles.. everywhere
 A combination of a loop and a scaled Math.random() can get us a nice result wtihout a lot of work.
 
 {% highlight javascript %}
-var randX:number;
-var randY:number;
-var randY:number;
+var randX;
+var randY;
+var randY;
 
 for(var i:number = 0; i < 100; i++) {
-	drawing.beginFill(0x00FF00);
+	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 
-	randX = Math.random() * 800;
-	randY = Math.random() * 600;
-	randR = Math.random() * 80;
+	randX = Math.random() * 800; //number between 0 and 800
+	randY = Math.random() * 600; //number between 0 and 600
+	randR = Math.random() * 80; //number between 0 and 80
 
+	fillCircle(randX,randY,randR);
 	drawing.drawCircle(randX, randY, randR);
 }
 {% endhighlight %}
