@@ -99,7 +99,7 @@ Drawing with loops can be rather fun if you play with the *iterator*.
 **Cicles of circles circling circles.**
 
 {% highlight javascript %}
-for(var i:number = 0; i < 10; i++) {
+for(var i = 0; i < 10; i++) {
 	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
 	fillCircle(200,200,i* 200);
 }
@@ -109,7 +109,7 @@ for(var i:number = 0; i < 10; i++) {
 
 {% highlight javascript %}
 ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-for(var i:number = 0; i < 10; i++) {
+for(var i = 0; i < 10; i++) {
 	ctx.fillRect(i*20, i*20, 20, 20);
 }
 {% endhighlight %}
@@ -118,7 +118,7 @@ for(var i:number = 0; i < 10; i++) {
 
 {% highlight javascript %}
 ctx.strokeStyle = "#0000FF"; //begins a blue stroke
-for(var i:number = 0; i < 10; i++) {
+for(var i = 0; i < 10; i++) {
 	drawing.drawCircle(0, 0, i*20, i*20);
 }
 {% endhighlight %}
@@ -139,7 +139,7 @@ It always produces a number between zero and one.
 If you multiply Math.random() it will produce a number between zero and the number you multiply by.
 
 {% highlight javascript %}
-var betweenZeroAndFive:number = Math.random() * 5;
+var betweenZeroAndFive = Math.random() * 5;
 {% endhighlight %}
 
 **Scaling to a random, whole number**
@@ -172,6 +172,5 @@ for(var i:number = 0; i < 100; i++) {
 	randR = Math.random() * 80; //number between 0 and 80
 
 	fillCircle(randX,randY,randR);
-	drawing.drawCircle(randX, randY, randR);
 }
 {% endhighlight %}

@@ -32,11 +32,11 @@ Making an Array
 ---------------------
 
 {% highlight javascript %}
-	var myArray:number[] = [1,2,3,4];
+	var myArray = [1,2,3,4];
 {% endhighlight %}
 
 {% highlight javascript %}
-	var myArray:string[] = [];
+	var myArray = [];
 {% endhighlight %}
 
 
@@ -47,7 +47,7 @@ Getting a value out of an array
 Write the square brackets, and inside the index you want.
 
 {% highlight javascript %}
-	var myArray:number[] = [5,4,3,2,1];
+	var myArray = [5,4,3,2,1];
 	myArray[0]; // 5
 	myArray[2]; // 3
 	myArray[3]; // 2
@@ -82,7 +82,7 @@ Some array examples
 ---------------------------------
 
 {% highlight javascript %}
-	var myArray:string[] = new Array("This", "array", "already", "has", "some", "content"); 
+	var myArray = new Array("This", "array", "already", "has", "some", "content"); 
 	console.log(myArray[0]); 
 	console.log(myArray[2]); 
 	console.log(myArray.toString());
@@ -94,7 +94,7 @@ already
 This, array, already, has, some, content
 
 {% highlight javascript %}
-	var myArray:string[] = new Array("This", "array", "already", "has", "some", "content");
+	var myArray = new Array("This", "array", "already", "has", "some", "content");
 	var firstWord = myArray.pop(); 
 	console.log(firstWord); 
 	var lastWord = myArray.shift();
@@ -117,7 +117,7 @@ Example:
 
 {% highlight javascript %}
 	var statement = “Some dogs have two teeth”;
-	var splitStatement:string[] = statement.split(“ “); //split on the spaces
+	var splitStatement = statement.split(“ “); //split on the spaces
 {% endhighlight %}
 
 The data in splitStatement will be
@@ -128,10 +128,10 @@ Yep, you can split on anything
 
 {% highlight javascript %}
 	var source = “Dogs,cats,rats,mice”;
-	var split:string[] = source.split(“,”); // [ “Dogs”, “cats”, “rats”, “mice” ]
+	var split = source.split(“,”); // [ “Dogs”, “cats”, “rats”, “mice” ]
 
 	var source = “Dogs,cats,rats,mice”;
-	var split:string[] = source.split(“rats,”); // [ “Dogs,cats,”,“mice” ];
+	var split = source.split(“rats,”); // [ “Dogs,cats,”,“mice” ];
 {% endhighlight %}
 
 
@@ -140,7 +140,7 @@ Yep, you can split on anything
 
 {% highlight javascript %}
 	var myArray = [ 2, 4, 6, 8, 10 ];
-	for(var i =o; i , myArray.length; i++) {
+	for(var i = 0; i , myArray.length; i++) {
 		var itemAtIndex = myArray[i];
 		console.log(itemAtIndex);
 	}
@@ -151,8 +151,8 @@ Summing up items in an array
 
 {% highlight javascript %}
 	var sum = 0;
-	var myArray:number[] = [ 2, 4, 6, 8, 10 ];
-	for(var i =o; i , myArray.length; i++) {
+	var myArray = [ 2, 4, 6, 8, 10 ];
+	for(var i = 0; i , myArray.length; i++) {
 		var itemAtIndex = myArray[i];
 		sum += itemAtIndex;
 	}
@@ -163,7 +163,7 @@ Searching Arrays
 
 
 {% highlight javascript %}
-	var myArray:string[] = [ “Spock”, “Kirk”, “McCoy”, “Luffy” ];
+	var myArray = [ “Spock”, “Kirk”, “McCoy”, “Luffy” ];
 	var thingToLookFor = “Luffy”;
 
 	for(var i =0; i < myArray.length; i++) {
@@ -183,7 +183,7 @@ Boxes of different sizes!
 -----------------------------------------
 
 {% highlight javascript %}
-var boxSizes:number[] = [10, 20, 30, 100];
+var boxSizes = [10, 20, 30, 100];
 
 for(var i:number = 0; i < boxSizes.length; i++) {
 	var currentSize:number = boxSizes[i];
@@ -198,10 +198,10 @@ The colors!
 ------------------------------------------
 
 {% highlight javascript %}
-var colors:number[] = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF, 0xFF00FF];
+var colors = [ "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"];
 
-for(var i:number = 0; i < boxSizes.length; i++) {
-	var currentColor:number = colors[i];
+for(var i = 0; i < boxSizes.length; i++) {
+	var currentColor = colors[i];
 	drawing.beginFill(currentColor);
 	drawing.drawRect(i*50, 0, 50, 200);
 }
@@ -218,57 +218,63 @@ Parallel arrays are simple, really. They are two arrays where the each entry in 
 
 
 {% highlight javascript %}
-var positionsX:number[] = [10, 50, 99];
-var positionsY:number[] = [1, 22, 45];
+var positionsX = [10, 50, 99];
+var positionsY = [1, 22, 45];
 {% endhighlight %}
 
 These two arrays are storing the points : (10,1),  (50,22), (99,45). The way the access them in code is like such:
 
 {% highlight javascript %}
-var positionsX:number[] = [10, 50, 99];
-var positionsY:number[] = [1, 22, 45];
+var positionsX = [10, 50, 99];
+var positionsY = [1, 22, 45];
 
-for(var i:number = 0; i < positionsX.length; i++) {
+for(var i = 0; i < positionsX.length; i++) {
 	console.log( positionsX[i], positionsY[i] );
 }
 {% endhighlight %}
 
 
 
-Great! Now, let's use those to make a snake that follows our mouse. (This assumes we have our animation code again)
+Great! Now, let's use those to make a snake that follows our mouse.
+
+Take note that we're using a new event, called onmousemove, and its got a sort of weird syntax. We'll come back to this in a few weeks and explain exactly what's going on with it. For now, though, its just magic.
+
+**The HTML**
+{% highlight html %}
+<canvas id="myCanvas" width="800" height="600" onmousemove="mouseMoved(event)"></canvas>
+{% endhighlight %}
 
 
+**The javascript**
 
 {% highlight javascript %}
-var positionsX:number[] = [];
-var positionsY:number[] = [];
+var positionsX = [];
+var positionsY = [];
 
 //initialize the arrays to have 50 zeroes in them
-for(var i:number = 0; i < 50; i++) {
-	positionsX[i] = 0;
-	positionsY[i] = 0;
+for(var i = 0; i < 20; i++) {
+    positionsX[i] = 0;
+    positionsY[i] = 0;
 }
 
-function draw() {
-	//clear drawing
-	//Oh yeah, that was the best comment ever.
-	drawing.clear();
+function mouseMoved(event) {
+    //clear drawing
+    //Oh yeah, that was the best comment ever.
+    ctx.clearRect(0, 0, 800, 600);
 
-	var mousePosition:PIXI.Point = stage.getMousePosition();
+    //add new position
+    positionsX.push(event.offsetX);
+    positionsY.push(event.offsetY);
 
-	//add new position
-	positionsX.push(mousePosition.x);
-	positionsY.push(mousePosition.y);
+    //remove oldest position
+    positionsX.shift();
+    positionsY.shift();
 
-	//remove oldest position
-	positionsX.unshift();
-	positionsY.unshift();
-
-	//draw our positions!
-	for(var i:number = 0; i < positionsX.length; i++) {
-		drawing.beginFill(0xFF0000);
-		drawing.drawCircle(positionsX[i], positionsY[i], i*2);
-	}
+    //draw our positions!
+    for(var i = 0; i < positionsX.length; i++) {
+        ctx.fillStyle = "rgba(255, 0, 0, " + i / 30 + ")";
+        fillCircle(positionsX[i], positionsY[i], i);
+    }
 
 }
 {% endhighlight %}
