@@ -31,7 +31,7 @@ Here is that same object, in Typescript.
 {% highlight javascript %}
 	var someChair = {
 		height: 23,
-		color: 0xFF0000,
+		color: "#FF0000",
 		weight: 10,
 		numLegs: 4
 	};
@@ -48,7 +48,7 @@ Use a **dot**.
 {% highlight javascript %}
 	var someChair = {
 		height: 23,
-		color: 0xFF0000,
+		color: "#FF0000",
 		weight: 10,
 		numLegs: 4
 	};
@@ -58,12 +58,17 @@ Use a **dot**.
 {% endhighlight %}
 
 
+
+Some nomenclature: variables that exist within a class are called **properties**.
+
 And yes, properties work just like variables too
 
+
 {% highlight javascript %}
+
 	var someChair = {
 		height: 23,
-		color: 0xFF0000,
+		color: "#FF0000",
 		weight: 10,
 		numLegs: 4
 	};
@@ -74,7 +79,7 @@ And yes, properties work just like variables too
 
 
 
-Classes -  easily making mulitple objects
+Object Constructor
 ------------------------------
 
 Objects are great for modeling a singular thing. If you want to make multiple of some object, it makes more sense to move on to a class.
@@ -83,22 +88,19 @@ Let's make a chair class, because we're not very creative.
 
 
 {% highlight javascript %}
-class Chair {
-	
-	height:number;
-	color:number;
-	weight:number;
-	numLegs:number;
-
+function Chair() {
+	this.height = 1;
+	this.color = "#FF0000;
+	this.weight = 20;
+	this.numLegs = 3;
 }
 {% endhighlight %}
 
 
 A class is just a specification for an object, however. If we want to make an actual version of it, we need to make an *instance* of that class.
 
-Some nomenclature: variables that exist within a class are called **properties**.
 
-Making an instance of a class
+Making an instance of an object
 ----------------------------------------
 
 1. Use the *new* keywork
@@ -106,25 +108,22 @@ Making an instance of a class
 3. Put paranthesis after the name
 
 {% highlight javascript %}
-class Chair {
-	
-	height:number;
-	color:number;
-	weight:number;
-	numLegs:number;
-
+function Chair() {
+	this.height = 1;
+	this.color = "#FF0000;
+	this.weight = 20;
+	this.numLegs = 3;
 }
 
 var someChair = new Chair();
 someChair.height = 23;
-someChair.color = 0xFF0000;
+someChair.color = "#FF0000";
 someChair.weight = 12;
 
 {% endhighlight %}
 
 Constructing a class
 ----------------------------------
-
 
 Sometimes it makes more sense to provide a series of values that the class will put into its properties by default.
 A constructor is a function (called a **method** when it appears inside of a class), that is run right when the class is instantiated (this happens when you see the **new** keyword).
@@ -133,60 +132,121 @@ In this case, we take a bunch of values, and store them in the class' properties
 
 {% highlight javascript %}
 
-class Chair {
-
-	height:number;
-	color:number;
-	weight:number;
-	numLegs:number;
-
-	constructor(theHeight:numbr, theColor:number, theWeight:number, theLegs:number) {
-        this.height = theHeight;
-        this.color = theColor;
-        this.weight = theWeight;
-        this.numLegs = theLegs;
-    }
-
+function Chair() {
+	this.height = 1;
+	this.color = "#FF0000;
+	this.weight = 20;
+	this.numLegs = 3;
 }
 
-var someChair = new Chair(23, 0xFF0000, 10, 4);
+var someChair = new Chair(23, "#FF0000", 10, 4);
 
 console.log(someChair.height); //23
 {% endhighlight %}
 
 
-Using a class for a bouncing ball
+Using an object for a bouncing ball
 ----------------------------------------
 
 {% highlight javascript %}
 
-class Ball {
+function Ball(theX, theY, theRadius, theColor, theVelocityX, theVelocityY) {
 
-	x:number;
-	y:number;
-	radius:number;
-	color:number;
-	velocityX:number;
-	velocityY:number;
-
-	constructor(theX:number, theY:number, theRadius:number, theColor:number, theVelocityX:number, theVelocityY) {
         this.x = theX;
         this.y = theY;
         this.radius = theRadius;
         this.color = theColor;
         this.velocityX = theVelocityX;
         this.velocityY = theVelocityY;
-    }
 
 }
 
-var velocity = {
-	x: 1,
-	y: 1
-};
-
-var oneBall = new Ball(100, 100, 50, 0x00FF00, velocity, 1, 1);
-
+var oneBall = new Ball(100, 100, 50, "#00FF00", 1, 1);
 
 
 {% endhighlight %}
+
+Velocity
+-------------------------------------
+
+How fast something is moving in a given direction (in this case, 1px / update)
+
+Animating the ball
+---------------------------------------
+
+{% highlight javascript %}
+	
+	var aBall = new Ball(100, 100, 20, "#FF0000", 1, 1);
+
+	animate();
+	function animate() {
+		//get rid of our old drawing.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		//draw the ball
+		ctx.fillStyle = aBall.color;
+		fillCircle(aBall.x, aBall.y, aBall.radius);
+
+		//move the ball
+		aBall.x += aBall.velocityX;
+		aBall.y += aBall.velocityY;
+
+		requestAnimationFrame(animate);
+	}
+
+
+	//---------- util functions ----------------
+
+	function Ball(theX, theY, theRadius, theColor, theVelocityX, theVelocityY) {
+
+        this.x = theX;
+        this.y = theY;
+        this.radius = theRadius;
+        this.color = theColor;
+        this.velocityX = theVelocityX;
+        this.velocityY = theVelocityY;
+
+	}
+
+	function fillCircle(x, y, radius) {
+		ctx.beginPath();
+		ctx.arc(x, y, radius, 0, Math.PI * 2);
+		ctx.closePath();
+		ctx.fill();
+	}
+
+{% endhighlight %}
+
+
+Boucning the ball
+-------------------------------------
+
+{% highlight javascript %}
+	function animate() {
+		//get rid of our old drawing.
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		//draw the ball
+		ctx.fillStyle = aBall.color;
+		fillCircle(aBall.x, aBall.y, aBall.radius);
+
+		//move the ball
+		aBall.x += aBall.velocityX;
+		aBall.y += aBall.velocityY;
+
+		//'bounce' off right corner
+		if(aBall.x > 800) {
+			aBall.x = 800;
+			aBall.velocityX *= -1;
+		}
+
+		requestAnimationFrame(animate);
+	}
+{% endhighlight %}
+
+
+Some challenges
+-----------------------------------
+
+- Complete the code for all four edges of the bounce
+- How would you go about making mulitple balls?

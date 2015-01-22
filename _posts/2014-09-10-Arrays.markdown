@@ -116,8 +116,8 @@ Its possible to make an array out of strings by splitting  them
 Example:
 
 {% highlight javascript %}
-	var statement = “Some dogs have two teeth”;
-	var splitStatement = statement.split(“ “); //split on the spaces
+	var statement = "Some dogs have two teeth";
+	var splitStatement = statement.split(" "); //split on the spaces
 {% endhighlight %}
 
 The data in splitStatement will be
@@ -127,11 +127,11 @@ The data in splitStatement will be
 Yep, you can split on anything
 
 {% highlight javascript %}
-	var source = “Dogs,cats,rats,mice”;
-	var split = source.split(“,”); // [ “Dogs”, “cats”, “rats”, “mice” ]
+	var source = "Dogs,cats,rats,mice";
+	var split = source.split(","); // [ "Dogs", "cats", "rats", "mice" ]
 
-	var source = “Dogs,cats,rats,mice”;
-	var split = source.split(“rats,”); // [ “Dogs,cats,”,“mice” ];
+	var source = "Dogs,cats,rats,mice";
+	var split = source.split("rats,"); // [ “Dogs,cats,”,“mice” ];
 {% endhighlight %}
 
 
@@ -140,7 +140,7 @@ Yep, you can split on anything
 
 {% highlight javascript %}
 	var myArray = [ 2, 4, 6, 8, 10 ];
-	for(var i = 0; i , myArray.length; i++) {
+	for(var i = 0; i < myArray.length; i++) {
 		var itemAtIndex = myArray[i];
 		console.log(itemAtIndex);
 	}
@@ -152,7 +152,7 @@ Summing up items in an array
 {% highlight javascript %}
 	var sum = 0;
 	var myArray = [ 2, 4, 6, 8, 10 ];
-	for(var i = 0; i , myArray.length; i++) {
+	for(var i = 0; i < myArray.length; i++) {
 		var itemAtIndex = myArray[i];
 		sum += itemAtIndex;
 	}
@@ -163,11 +163,11 @@ Searching Arrays
 
 
 {% highlight javascript %}
-	var myArray = [ “Spock”, “Kirk”, “McCoy”, “Luffy” ];
-	var thingToLookFor = “Luffy”;
+	var myArray = [ "Spock", "Kirk", "McCoy", "Luffy" ];
+	var thingToLookFor = "Luffy";
 
-	for(var i =0; i < myArray.length; i++) {
-		var itemAtIndex = myArra[i];
+	for(var i = 0; i < myArray.length; i++) {
+		var itemAtIndex = myArray[i];
 		if( itemAtIndex == thingToLookFor) {
 			break;
 		}
