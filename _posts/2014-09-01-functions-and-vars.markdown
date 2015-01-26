@@ -16,7 +16,7 @@ Variables store values. That is it. (Values, of course, can be a lot of things, 
 
 *To make a variable*
 
-Type the keyword `var`, the name of the var, a *colon*, and then a *variable type*.
+Type the keyword `var`, the name of the var, and then a *variable type*.
 
 {% highlight javascript %}
 var myVar;
