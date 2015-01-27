@@ -90,7 +90,7 @@ Let's make a chair class, because we're not very creative.
 {% highlight javascript %}
 function Chair() {
 	this.height = 1;
-	this.color = "#FF0000;
+	this.color = "#FF0000";
 	this.weight = 20;
 	this.numLegs = 3;
 }
@@ -110,7 +110,7 @@ Making an instance of an object
 {% highlight javascript %}
 function Chair() {
 	this.height = 1;
-	this.color = "#FF0000;
+	this.color = "#FF0000";
 	this.weight = 20;
 	this.numLegs = 3;
 }
@@ -134,7 +134,7 @@ In this case, we take a bunch of values, and store them in the class' properties
 
 function Chair() {
 	this.height = 1;
-	this.color = "#FF0000;
+	this.color = "#FF0000";
 	this.weight = 20;
 	this.numLegs = 3;
 }
