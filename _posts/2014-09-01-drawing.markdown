@@ -27,11 +27,11 @@ Color, is set using *hexadecimal*. We're not going to go into how to convert the
 
 *Some color examples*
 
-- **Red:** 0xFF0000
-- **Green:** 0x00FF00
-- **Blue:** 0x0000FF
-- **White:** 0xFFFFFF
-- **Black:** 0x000000
+- **Red:** #FF0000
+- **Green:** #00FF00
+- **Blue:** #0000FF
+- **White:** #FFFFFF
+- **Black:** #000000
 
 Drawing
 ------------------------------
@@ -130,9 +130,9 @@ This is how drawing lines works. (Note your 'digital pencil' always starts in th
 {% highlight javascript %}
 ctx.strokeStyle = '#FFFF00';
 ctx.beginPath();
-drawing.moveTo(200, 0); //does not draw, but the next 'lineTo' will start at 200,0
+ctx.moveTo(200, 0); //does not draw, but the next 'lineTo' will start at 200,0
 						// Your lines always need to start with a 'moveTo'
-drawing.lineTo(200,100); //draws a line straight down from 200,0
+ctx.lineTo(200,100); //draws a line straight down from 200,0
 {% endhighlight %}
 
 Drawing a circle
