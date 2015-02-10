@@ -54,8 +54,8 @@ document.getElementById gets a reference to the DOM element.
 So, this is totally valid:
 
 {% highlight javascript %}
-var refOne = document.getElementById(“myDiv”);
-var refTwo = document.getElementById(“myDiv”);
+var refOne = document.getElementById("myDiv");
+var refTwo = document.getElementById("myDiv");
 {% endhighlight %}
 
 Both are references to myDiv, though neither of them actually **are** myDiv
@@ -130,7 +130,7 @@ Changing styles
 Use the style property, and its sub properties
 
 {% highlight javascript %}
-myDivRef.style.backgroundColor = “#00FF00”;
+myDivRef.style.backgroundColor = "#00FF00";
 myDivRef.style.width = 100;
 {% endhighlight %}
 

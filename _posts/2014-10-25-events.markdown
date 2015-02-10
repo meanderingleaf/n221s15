@@ -183,24 +183,15 @@ domReference.appendChild(newElement);
 Getting mouse position
 ---------------------------------------------
 
-Use stage.getMousePosition();
-
-Store the result in a variable with type PIXI.Point.
+The mouse position can only be gotten inside of an event related to a mouse action (click, up, down.. move). For this particular example it makes the most sense to get the mouse's position as its moving, so we're going to add a listener and respond to that event
 
 {% highlight javascript %}
 
-	var xPosition:number = 0;
+document.addEventListener('mousemove', onMouseMove);
 
-	function draw() {
-		//get rid of our old drawing.
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		//get the mouse position
-		var mousePosition:PIXI.Point = stage.getMousePosition();
-
-		//show mouse position on console
-    	console.log(mousePosition.x, mousePosition.y);
-	}
+function onMouseMove(event) {
+     console.log(event.x, event.y);
+}
 
 {% endhighlight %}
 
@@ -209,59 +200,69 @@ Store the result in a variable with type PIXI.Point.
 Using mouse position to control things on the screen
 ------------------------------------------------
 
-CHanging color and position based on the x-position of the mouse.
+Drawing a line, in this case, from where the mouse last was to where the mouse currently is.
 
 {% highlight javascript %}
 
-	var xPosition:number = 0;
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
 
-	function draw() {
-		//get rid of our old drawing.
-		drawing.clear();
+var lastPosition = { x: 0, y: 0 }
 
-		//get the mouse position
-		var mousePosition:PIXI.Point = stage.getMousePosition();
+document.addEventListener('mousemove', onMouseMove);
 
-		if(mousePosition.x < 100 && mousePosition.y < 100) {
-			drawing.beginFill(0xFF0000);
-			drawing.drawRect(0,0,100,100);
-		} else {
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(0,0,400,400);
-		}
-	}
 
+function onMouseMove(event) {
+
+	ctx.moveTo(lastPosition.x, lastPosition.y);
+	ctx.strokeStyle = "rgb(41, 128, 185)";
+	ctx.lineWidth = 17;
+	ctx.lineJoin = "round";
+
+	ctx.lineTo(event.x, event.y);
+	ctx.closePath();
+	ctx.stroke();
+
+	lastPosition.x = event.x;
+	lastPosition.y = event.y;
+}
 {% endhighlight %}
 
+
+[http://jsfiddle.net/tqrdhy8u/](http://jsfiddle.net/tqrdhy8u/)
 
 Using complex conditionals to highlight corners
 -----------------------------------------------
 
 {% highlight javascript %}
 
-	var xPosition:number = 0;
-
-	function draw() {
-		//get rid of our old drawing.
-		drawing.clear();
-
-		//get the mouse position
-		var mousePosition:PIXI.Point = stage.getMousePosition();
 
 
-		if(mousePosition.x < 100 && mousePosition.y < 100) { //upper left
-			drawing.beginFill(0xFF0000);
-			drawing.drawRect(0,0,100,100);
-		} else if (mousePosition.x < 100 && mousePosition.y > 100 { //lower left
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(0,100,100,100);
-		} else if(mousePosition.x > 100 && mousePosition.y < 100) { // upper right
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(100,0,100,100);
-		} else if(mousePosition.x > 100 && mousePosition.y > 100) { // lower right
-			drawing.beginFill(0x00FF00);
-			drawing.drawRect(100,100,100,100);
-		}
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+document.addEventListener('mousemove', onMouseMove);
+
+
+function onMouseMove(event) {
+
+	//get rid of our old drawing.
+	ctx.clearRect(0,0,800,600);
+
+	if(event.x < 100 && event.y < 100) { //upper left
+		ctx.fillStyle = "#FF0000";
+		drawing.fillRect(0,0,100,100);
+	} else if (event.x < 100 && event.y > 100 { //lower left
+		ctx.fillStyle = "#00FF00";
+		drawing.fillRect(0,100,100,100);
+	} else if(event.x > 100 && event.y < 100) { // upper right
+		drawing.fillStyle = "#00FF00";
+		drawing.fillRect(100,0,100,100);
+	} else if(event.x > 100 && event.y > 100) { // lower right
+		drawing.fillStyle = "#00FF00";
+		drawing.fillRect(100,100,100,100);
 	}
+}
+
 
 {% endhighlight %}
