@@ -30,7 +30,7 @@ Several methods (all inside of havascript)
 
 1. document.getElementsByTagName("tagName");
 2. document.getElementById("id");
-3. document.getElementByClassName("className");
+3. document.getElementsByClassName("className");
 4. document.querySelector("#css .selector");
 
 All of these return a [DOM Element](https://developer.mozilla.org/en-US/docs/Web/API/element) (or an array of DOM elements) reference.
@@ -66,7 +66,7 @@ Get element by ID
 
 {% highlight javascript %}
 //now I have a reference to myDiv element
-var divRef = document.getElementByID('myDiv');
+var divRef = document.getElementById('myDiv');
 {% endhighlight %}
 
 {% highlight html %}
@@ -201,19 +201,10 @@ divToAddTo.appendChild(elm);
 Removing elements
 ----------------------------------------
 
-**removeChild(childToRemove)**
-Must be called on the parent container. The one argument is the element to remove
-
-To remove an element:
+**domRef.removeChild()**
 
 {% highlight javascript %}
-parentDiv.removeChild(myDiv);
-{% endhighlight %}
-
-To remove an element (if you don’t know its parent):
-
-{% highlight javascript %}
-myDivRef.parent.removeChild(myDivRef);
+myDivRef.remove()
 {% endhighlight %}
 
 
