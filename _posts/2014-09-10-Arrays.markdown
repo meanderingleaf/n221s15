@@ -82,29 +82,29 @@ Some array examples
 ---------------------------------
 
 {% highlight javascript %}
-	var myArray = new Array("This", "array", "already", "has", "some", "content"); 
-	console.log(myArray[0]); 
-	console.log(myArray[2]); 
+	var myArray = new Array("This", "array", "already", "has", "some", "content");
+	console.log(myArray[0]);
+	console.log(myArray[2]);
 	console.log(myArray.toString());
 {% endhighlight %}
 
 Output
-This 
-already 
+This
+already
 This, array, already, has, some, content
 
 {% highlight javascript %}
 	var myArray = new Array("This", "array", "already", "has", "some", "content");
-	var firstWord = myArray.pop(); 
-	console.log(firstWord); 
+	var firstWord = myArray.pop();
+	console.log(firstWord);
 	var lastWord = myArray.shift();
-	console.log(lastWord); 
+	console.log(lastWord);
 	console.log("Length " + myArray.length);
 {% endhighlight %}
 
 Output
-This 
-content 
+This
+content
 Length: 4
 
 
@@ -174,107 +174,25 @@ Searching Arrays
 	}
 {% endhighlight %}
 
-Drawing with arrays
-----------------------------------------
 
-Awesome, so we can store data in our array. All of our drawing is just numbers driving our drawings too. So now we have a way to store data about lots of all drawings. Here's some examples:
+Parallel Arrays
+-----------------------------------
 
-Boxes of different sizes!
------------------------------------------
-
-{% highlight javascript %}
-var boxSizes = [10, 20, 30, 100];
-
-for(var i:number = 0; i < boxSizes.length; i++) {
-	var currentSize:number = boxSizes[i];
-	drawing.lineStyle(1, 0x0000FF, 1);
-	drawing.drawRect(0,0, currentSize, currentSize);
-}
-
-{% endhighlight %}
-
-
-The colors!
-------------------------------------------
+- Storing data associated with each other in two different arrays
+- Data at the same index in each array are assumed to be related.
+- Here one array stores names, while the other stores employment
 
 {% highlight javascript %}
-var colors = [ "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"];
-
-for(var i = 0; i < boxSizes.length; i++) {
-	var currentColor = colors[i];
-	drawing.beginFill(currentColor);
-	drawing.drawRect(i*50, 0, 50, 200);
-}
-
+var names = [ "Stan", "Lee", "Isolde" ];
+var employment = [ "Janitor", "Cook", "Queen" ];
 {% endhighlight %}
 
-
-Snaaaaaaaake
-------------------------------------------
-
-This one makes use of push and pop, and something called an **parallel array**
-
-Parallel arrays are simple, really. They are two arrays where the each entry in one array is related to an entry in the second array at every index. So, here's an example:
-
+- In the example above, entry 0 in names is related to entry 0 in employment.
+- So Stan is a Janitor, Lee is a cook, and Isolde is a Queen
+- Can easily get all the data with a for loop
 
 {% highlight javascript %}
-var positionsX = [10, 50, 99];
-var positionsY = [1, 22, 45];
-{% endhighlight %}
-
-These two arrays are storing the points : (10,1),  (50,22), (99,45). The way the access them in code is like such:
-
-{% highlight javascript %}
-var positionsX = [10, 50, 99];
-var positionsY = [1, 22, 45];
-
-for(var i = 0; i < positionsX.length; i++) {
-	console.log( positionsX[i], positionsY[i] );
-}
-{% endhighlight %}
-
-
-
-Great! Now, let's use those to make a snake that follows our mouse.
-
-Take note that we're using a new event, called onmousemove, and its got a sort of weird syntax. We'll come back to this in a few weeks and explain exactly what's going on with it. For now, though, its just magic.
-
-**The HTML**
-{% highlight html %}
-<canvas id="myCanvas" width="800" height="600" onmousemove="mouseMoved(event)"></canvas>
-{% endhighlight %}
-
-
-**The javascript**
-
-{% highlight javascript %}
-var positionsX = [];
-var positionsY = [];
-
-//initialize the arrays to have 50 zeroes in them
-for(var i = 0; i < 20; i++) {
-    positionsX[i] = 0;
-    positionsY[i] = 0;
-}
-
-function mouseMoved(event) {
-    //clear drawing
-    //Oh yeah, that was the best comment ever.
-    ctx.clearRect(0, 0, 800, 600);
-
-    //add new position
-    positionsX.push(event.offsetX);
-    positionsY.push(event.offsetY);
-
-    //remove oldest position
-    positionsX.shift();
-    positionsY.shift();
-
-    //draw our positions!
-    for(var i = 0; i < positionsX.length; i++) {
-        ctx.fillStyle = "rgba(255, 0, 0, " + i / 30 + ")";
-        fillCircle(positionsX[i], positionsY[i], i);
-    }
-
+for( var i = 0; i < names.length; i++) {
+	console.log( names[i] + " is a " + employment[i]);
 }
 {% endhighlight %}
