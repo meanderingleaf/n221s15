@@ -1,0 +1,86 @@
+---
+layout: post
+title:  "Animation and Positioning"
+date:   2015-11-03 03:24:54
+categories: update
+---
+
+
+Animation and positioning
+-----------------------------------------
+
+Animating things is fun. There’s something about creating something that just.. moves on its own that is quite satisfying. If we want to get to some of the interesting, gamey type stuff in HTML, we need to figure out two things: 1) How to create code that runs more than once at a time. and 2) how to position elements at set places on the screen.
+
+Creating code that runs multiple time a second - setInterval
+
+The javascript-level keyword, setInterval, will setup your project to run on a specific interval, based on miliseconds.
+
+
+{% highlight javascript %}
+setInterval(tick, 1000); //this will call the tick function every 1000 miliseconds
+
+function tick() {
+ //run your update code
+}
+{% endhighlight %}
+
+
+Making DOM elements that can be moved around
+-----------------------------------------------------------
+
+In order to animate any of the elements on the screen, they must have their positions set to either absolute, or relative. While these are CSS properties, we will be specifying them via javascript in these examples.
+
+{% highlight javascript %}
+var newElement = document.createElement(‘div’);
+newElement.style.width = “100px”;
+newElement.style.height = “100px”;
+newElement.style.position = “absolute”; //this will enable the developer to move the element around
+{% endhighlight %}
+
+
+Positioning DOM elements
+-----------------------------------------
+
+
+In order to move a DOM element around, one typically will adjust the element’s top and left style properties. Top will move the element around on the ‘y’/vertical axis, while left will move the object around on the ‘x’/horizontal axis.
+
+{% highlight javascript %}
+//Makes a new element, puts it 5px below and to the right of the top left of the screen
+var newElement = document.createElement(‘div’);
+newElement.style.width = “100px”;
+newElement.style.height = “100px”;
+newElement.style.backgroundColor = “#FF0000”;
+newElement.style.position = “absolute”;
+newElement.style.top = “5px”;
+newElement.style.left = “5px”;
+{% endhighlight %}
+
+
+
+Moving DOM elements
+--------------------------------------
+
+Combining our setInterval code with positioning code will get us actual animation. This is done by creating variables whose value we modify with each call of the animation tick, and then changing an element’s position on the page based on those numbers. All of these variables have to be outside the function’s scope.
+
+{% highlight javascript %}
+//Makes a new element, puts it 5px below and to the right of the top left of the screen
+var newElement = document.createElement(‘div’);
+newElement.style.width = “100px”;
+newElement.style.height = “100px”;
+newElement.style.backgroundColor = “#FF0000”;
+newElement.style.position = “absolute”;
+newElement.style.top = “5px”;
+newElement.style.left = “5px”;
+
+
+var elementPositionX = 5;
+var elementPositionY = 5;
+
+setTimeout(tick, 30);
+function tick() {
+    elementPositionX ++;
+    elementPositionY ++;
+    newElement.style.top = elementPositionY + “px”;
+    newElement.style.left = elementPositionX + “px”;
+}
+{% endhighlight %}
