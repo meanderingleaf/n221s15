@@ -12,9 +12,25 @@ Okay, let's talk about the building blocks of code: functions and variables.
 **Variables**
 -------------------------------
 
-Variables store values. That is it. (Values, of course, can be a lot of things, from numbers to graphics).
+Variables store values. That is it.
+
+They're just names that point to a value.
+
+**Values**
+---------------------------------
+
+Values can be just about anything. This class is going to be working with these value types, for the most part:
+
+- Numbers
+- Strings (text)
+- Booleans (true/false)
+- HTML Elements
+- HTML Inputs
+
+Again, a variable is just a way to reference one of these values. Its like a page number in a book, a place to look up the data.
 
 *To make a variable*
+---------------------------------
 
 Type the keyword `var`, the name of the var, and then a *variable type*.
 
@@ -79,10 +95,10 @@ var isWarm = true;
 {% endhighlight %}
 
 
-Operands
+**Operands**
 ------------------------------
 
-You can do more with variables than just assign single values.
+You can do more with variables than just assign single values. Variable operands let you manipulate the values inside the variables.
 
 {% highlight javascript %}
 var a = 4;
@@ -315,7 +331,7 @@ Now that we have functions, we need to start worrying about **variable scope**
 
 {% highlight javascript %}
 function myFunc() {
-	var awesomeVariable:string = "Pretty cool";
+	var awesomeVariable = "Pretty cool";
 }
 
 function myOtherFunction() {
@@ -327,7 +343,7 @@ console.log(awesomeVariable); //won't work
 {% endhighlight %}
 
 {% highlight javascript %}
-var awesomeVariable:string = "Pretty cool";
+var awesomeVariable = "Pretty cool";
 
 function myFunc() {
 	console.log(awesomeVariable); //will work
@@ -364,15 +380,18 @@ Okay, great. Let's finish this up. *Assuming we have both of these on the screen
 
 {% highlight javascript %}
 function getUsername() {
-	var username = document.getElementById('userName').value;
+	var username = document.querySelector('#userName').value;
 	console.log(username);
 }
 {% endhighlight %}
 
 Two things here:
 
-*document.getElementById* will get any element on the screen with an ID that you pass in as an argument.
+*document.querySelector* will get any HTML tag (an *element*) on the page that matches its CSS selector
+
 *.value* will get the value of any input element, if it has one.
+
+**You need to use both** to get what the user has written inside of the input tag.
 
 
 Showing output
@@ -387,31 +406,6 @@ Add a tag with an ID, like so
 Inside any function, change its *innerHTML*
 
 {% highlight javascript %}
-var output = document.getElementById('output');
+var output = document.querySelector('#output');
 output.innerHTML = "Hello!";
 {% endhighlight %}
-
-
-Simplfying a circle drawing
---------------------------------------------------------
-
-Okay, let's be honest, drawing a circle sucks. Let's make a function that takes some of the pain out of the process:
-
-{% highlight javascript %}
-function fillCircle(x, y, radius) {
-	ctx.beginPath();
-	ctx.arc(x, y, radius, 0, Math.PI * 2);
-	ctx.closePath();
-	ctx.fill();
-}
-{% endhighlight %}
-
-
-And now, to use this function:
-
-{% highlight javascript %}
-ctx.fillStyle = "#00FF00";
-fillCircle(10, 10, 30); //draws a circle for us.
-fillCircle(20, 20, 20); //draws another circle for us
-{% endhighlight %}
-
