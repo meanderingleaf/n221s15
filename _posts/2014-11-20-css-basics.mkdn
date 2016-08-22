@@ -99,7 +99,8 @@ Some major ones will will be dealing with in this class:
 - left ( the upper-corner position of the box)
 - position (if we have control over it, or the layout engine does)
 - opacity (how visible / see through something is)
-
+- cursor (what mouse cursor to show)
+- float (to break the element out of box positioning)
 
 Height and width
 ------------------------

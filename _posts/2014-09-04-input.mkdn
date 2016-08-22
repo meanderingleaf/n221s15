@@ -12,7 +12,7 @@ Inputs
 We'll cycle back to inputs at a later class date, but here's the quick basics of inputs.
 
 
-We'll be working with two basic kinds of inputs throughout much of this class. 
+We'll be working with two basic kinds of inputs throughout much of this class.
 
 Text Inputs
 ------------------------
@@ -32,9 +32,9 @@ var txtPuppies = document.getElementById("txtPuppies");
 To get the text that a user has typed into that input, we would use the **.value** property of the reference.
 
 {% highlight javascript %}
-var txtPuppies = document.getElementById("txtPuppies");
+var txtPuppies = document.querySelector("#txtPuppies");
 
-console.log(txtPuppies.value);//whatever is 
+console.log(txtPuppies.value);//whatever is
 {% endhighlight %}
 
 
@@ -51,8 +51,8 @@ A second 'input' we will use with startling regularity is the button.
 TO respond to clicks, we would then write this code
 
 {% highlight javascript %}
-document.getElementById("btnDosomething").onclick = function() {
-	console.log("You clicked it, didn't you?");	
+document.querySelector("#btnDosomething").onclick = function() {
+	console.log("You clicked it, didn't you?");
 }
 {% endhighlight %}
 
@@ -67,7 +67,7 @@ Sometimes its helpful to remove the text inside an input. Here is how one goes a
 {% endhighlight %}
 
 {% highlight javascript %}
-var txtPuppies = document.getElementById("txtPuppies");
+var txtPuppies = document.querySelector("#txtPuppies");
 
 txtPuppies.value = ""; //sets the text inside of txtPuppies to.. nothing.
 {% endhighlight %}
