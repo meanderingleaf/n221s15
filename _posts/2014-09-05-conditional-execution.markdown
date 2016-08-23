@@ -60,7 +60,7 @@ The if statement
 - An example:
 
 {% highlight javascript %}
-if(true) 
+if(true)
 {
 	//this code runs
 }
@@ -74,11 +74,27 @@ Else
 {% highlight javascript %}
 if(4<5) {
 	alert("All is right with the world.");
-} 
-else 
+}
+else
 {
 	alert("Something has gone terribly wrong");
 }
+{% endhighlight %}
+
+
+Confirms
+---------------------------------------------------
+
+These are awful. Never use them in real development. And yet, for our purposes here, they can be useful.
+
+In short, using the confirm method in JavaScript pops up a window that displays some text and lets the user respond with a *yes* or a *no*.
+
+This response turns into a boolean **true** or **false**.
+
+{% highlight javascript %}
+var yesOrNoHmmm = confirm("Yes or no?");
+
+console.log(yesOrNoHmmm); //will be either true or false
 {% endhighlight %}
 
 
@@ -92,16 +108,16 @@ Nesting conditionals
 var readAbook = confirm("Do you want to read a book?");
 var doHomework = confirm("Do you also want to do you homework?")
 
-if(readABook == true) 
+if(readABook == true)
 {
 	//if the user wants to read a book
-	if(doHomework==true) 
+	if(doHomework==true)
 	{
 		//if the user wants to do their homework
 		alert("Excellent!");
 	}
-} 
-else 
+}
+else
 {
 	//if the user does not want to read a book
 	alert("Your mind will rot!")
@@ -112,7 +128,7 @@ else
 Quick question
 --------------------------------------------------------
 
-- With the code above, is there a chance the usere will _not_ see a final alert?
+- With the code above, is there a chance the user will _not_ see a final alert?
 
 Logical operators
 --------------------------------------------------------
@@ -148,12 +164,12 @@ Simplifying our previous if/else statement
 var readAbook = confirm("Do you want to read a book?");
 var doHomework = confirm("Do you also want to do you homework?")
 
-if(readABook == true && doHomework == true) 
+if(readABook == true && doHomework == true)
 {
 	//if the user wants to read a book AND do their homework
 	alert("Excellent!");
-} 
-else 
+}
+else
 {
 	//if the user does not want to read a book
 	alert("Your mind will rot!")
@@ -178,7 +194,7 @@ if(grade >= 90) {
 } else if (grade >=70) {
 	console.log("I am avergae.");
 } else {
-	console.log("Count have done better...")
+	console.log("Count have done better...");
 }
 
 {% endhighlight %}
@@ -191,78 +207,3 @@ A brief note about formatting
 - And once that block exits with a }, the following lines are not longer tabbed in
 - Get in the habit of doing this
 	- Yes, it will be worth points
-
-
-Using buttons to control an animated drawing
----------------------------------------------
-
-First, the HTML
-
-{% highlight html %}
-<input type="button" id="btnLeft" value="left" /> <input type="button" id="btnRight" value="right" />
-<canvas id="myCanvas" width="800" height="600"></canvas>
-{% endhighlight %}
-
-
-Then, the Javascript
-
-{% highlight javascript %}
-	var xPosition = 0;
-
-	document.getElementById('btnLeft').onclick = function() {
-		xPosition -= 10;
-	}
-
-	document.getElementById('btnRight').onclick = function() {
-		xPosition += 10;
-	}
-
-	animate();
-	function animate() {
-		//get rid of our old drawing.
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		//draw our new stuff
-		ctx.fillStyle = "#FF0000";
-		fillCircle(xPosition,0,100);
-
-		xPosition = xPosition + 1;
-		requestAnimationFrame(animate);
-	}
-{% endhighlight %}
-
-
-Using if statments with the animation
----------------------------------
-
-Let's change the drawing so its got different colors based on the side its on.
-We're going to focus on only the drawing portion of the code, this time.
-
-{% highlight javascript %}
-function animate() {
-	//get rid of our old drawing.
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-	//draw our new stuff
-	if(xPosition < 400) {
-		//red on left
-		ctx.fillStyle = "#FF0000";
-	} else {
-		//blue on the right
-		ctx.fillStyle = "#0000FF";
-	}
-	fillCircle(xPosition,0,100);
-
-	xPosition = xPosition + 1;
-	requestAnimationFrame(animate);
-}
-{% endhighlight %}
-
-
-Some challenges
--------------------------------
-
-How do you change the above code so:
-	1. The circle is colored green on the middle on the screen (between 300 and 500)
-	2. The circle can up and down
-	3. Once the circle can go up and down, how does the code change so the circle is different colors in the four quadrants?
