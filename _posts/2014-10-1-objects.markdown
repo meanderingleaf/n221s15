@@ -74,7 +74,7 @@ And yes, properties work just like variables too
 	};
 
 	someChair.height = 10; //smaller chair
-	
+
 {% endhighlight %}
 
 
@@ -143,110 +143,3 @@ var someChair = new Chair(23, "#FF0000", 10, 4);
 
 console.log(someChair.height); //23
 {% endhighlight %}
-
-
-Using an object for a bouncing ball
-----------------------------------------
-
-{% highlight javascript %}
-
-function Ball(theX, theY, theRadius, theColor, theVelocityX, theVelocityY) {
-
-        this.x = theX;
-        this.y = theY;
-        this.radius = theRadius;
-        this.color = theColor;
-        this.velocityX = theVelocityX;
-        this.velocityY = theVelocityY;
-
-}
-
-var oneBall = new Ball(100, 100, 50, "#00FF00", 1, 1);
-
-
-{% endhighlight %}
-
-Velocity
--------------------------------------
-
-How fast something is moving in a given direction (in this case, 1px / update)
-
-Animating the ball
----------------------------------------
-
-{% highlight javascript %}
-	
-	var aBall = new Ball(100, 100, 20, "#FF0000", 1, 1);
-
-	animate();
-	function animate() {
-		//get rid of our old drawing.
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		//draw the ball
-		ctx.fillStyle = aBall.color;
-		fillCircle(aBall.x, aBall.y, aBall.radius);
-
-		//move the ball
-		aBall.x += aBall.velocityX;
-		aBall.y += aBall.velocityY;
-
-		requestAnimationFrame(animate);
-	}
-
-
-	//---------- util functions ----------------
-
-	function Ball(theX, theY, theRadius, theColor, theVelocityX, theVelocityY) {
-
-        this.x = theX;
-        this.y = theY;
-        this.radius = theRadius;
-        this.color = theColor;
-        this.velocityX = theVelocityX;
-        this.velocityY = theVelocityY;
-
-	}
-
-	function fillCircle(x, y, radius) {
-		ctx.beginPath();
-		ctx.arc(x, y, radius, 0, Math.PI * 2);
-		ctx.closePath();
-		ctx.fill();
-	}
-
-{% endhighlight %}
-
-
-Boucning the ball
--------------------------------------
-
-{% highlight javascript %}
-	function animate() {
-		//get rid of our old drawing.
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-		//draw the ball
-		ctx.fillStyle = aBall.color;
-		fillCircle(aBall.x, aBall.y, aBall.radius);
-
-		//move the ball
-		aBall.x += aBall.velocityX;
-		aBall.y += aBall.velocityY;
-
-		//'bounce' off right corner
-		if(aBall.x > 800) {
-			aBall.x = 800;
-			aBall.velocityX *= -1;
-		}
-
-		requestAnimationFrame(animate);
-	}
-{% endhighlight %}
-
-
-Some challenges
------------------------------------
-
-- Complete the code for all four edges of the bounce
-- How would you go about making mulitple balls?
