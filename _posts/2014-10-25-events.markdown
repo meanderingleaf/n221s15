@@ -70,8 +70,8 @@ Assigning an event listener via html
 {% endhighlight %}
 
 {% highlight javascript %}
-function handleClick(event) { 
-	console.log("I've been hit!!"); 
+function handleClick(event) {
+	console.log("I've been hit!!");
 }
 {% endhighlight %}
 
@@ -85,8 +85,8 @@ On an image
 
 
 {% highlight javascript %}
-function handleClick(event) { 
-	console.log("I've been hit!!"); 
+function handleClick(event) {
+	console.log("I've been hit!!");
 }
 {% endhighlight %}
 
@@ -95,10 +95,10 @@ Event listeners in just javascript
 
 {% highlight javascript %}
 var divRef = document.getElementById("myDiv");
-divRef.addEventListener("mouseover", onMouseOver); 
+divRef.addEventListener("mouseover", onMouseOver);
 
-function onMouseOver(event) { 
-	console.log("I've been found!"); 
+function onMouseOver(event) {
+	console.log("I've been found!");
 }
 {% endhighlight %}
 
@@ -109,10 +109,10 @@ Click event in just code
 
 {% highlight javascript %}
 var someDiv = document.getElementById("myDiv");
-someDiv.addEventListener("click", onMouseClick); 
+someDiv.addEventListener("click", onMouseClick);
 
-function onMouseClick(event):void { 
-	console.log("I've been hit!!"); 
+function onMouseClick(event):void {
+	console.log("I've been hit!!");
 }
 {% endhighlight %}
 
@@ -120,10 +120,10 @@ Some gotchas
 ---------------------------
 
 {% highlight javascript %}
-domRef.addEventListener("mouseover", onMouseOver); 
+domRef.addEventListener("mouseover", onMouseOver);
 
-function onMouseOver(event) { 
-	trace("I've been found!"); 
+function onMouseOver(event) {
+	trace("I've been found!");
 }
 {% endhighlight %}
 
@@ -192,77 +192,5 @@ document.addEventListener('mousemove', onMouseMove);
 function onMouseMove(event) {
      console.log(event.x, event.y);
 }
-
-{% endhighlight %}
-
-
-
-Using mouse position to control things on the screen
-------------------------------------------------
-
-Drawing a line, in this case, from where the mouse last was to where the mouse currently is.
-
-{% highlight javascript %}
-
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
-
-var lastPosition = { x: 0, y: 0 }
-
-document.addEventListener('mousemove', onMouseMove);
-
-
-function onMouseMove(event) {
-
-	ctx.moveTo(lastPosition.x, lastPosition.y);
-	ctx.strokeStyle = "rgb(41, 128, 185)";
-	ctx.lineWidth = 17;
-	ctx.lineJoin = "round";
-
-	ctx.lineTo(event.x, event.y);
-	ctx.closePath();
-	ctx.stroke();
-
-	lastPosition.x = event.x;
-	lastPosition.y = event.y;
-}
-{% endhighlight %}
-
-
-[http://jsfiddle.net/tqrdhy8u/](http://jsfiddle.net/tqrdhy8u/)
-
-Using complex conditionals to highlight corners
------------------------------------------------
-
-{% highlight javascript %}
-
-
-
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
-
-document.addEventListener('mousemove', onMouseMove);
-
-
-function onMouseMove(event) {
-
-	//get rid of our old drawing.
-	ctx.clearRect(0,0,800,600);
-
-	if(event.x < 100 && event.y < 100) { //upper left
-		ctx.fillStyle = "#FF0000";
-		drawing.fillRect(0,0,100,100);
-	} else if (event.x < 100 && event.y > 100 { //lower left
-		ctx.fillStyle = "#00FF00";
-		drawing.fillRect(0,100,100,100);
-	} else if(event.x > 100 && event.y < 100) { // upper right
-		drawing.fillStyle = "#00FF00";
-		drawing.fillRect(100,0,100,100);
-	} else if(event.x > 100 && event.y > 100) { // lower right
-		drawing.fillStyle = "#00FF00";
-		drawing.fillRect(100,100,100,100);
-	}
-}
-
 
 {% endhighlight %}
