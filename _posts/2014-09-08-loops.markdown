@@ -17,13 +17,14 @@ For loop
 {% highlight javascript %}
 //This particular loop will run five times
 //Its cool like that
-for(var i = 0; i < 5; i++) 
+for(var i = 0; i < 5; i++)
 {
 	console.log(i);
 }
 {% endhighlight %}
 
-- For loops have three parts inside their parens
+For loops have three parts inside their parens
+
 	1. Create a variable (called an **iterand** when used in looping, and often named 'i'), and sets it to a value (usually '0')
 	2. A logical test. **The moment the test returns false, the loop halts**
 		- This test is run every time before the loop is executed
@@ -35,13 +36,13 @@ Some others.
 
 {% highlight javascript %}
 //runs seven times
-for(var i = 0; i < 7; i++) 
+for(var i = 0; i < 7; i++)
 {
 	console.log(i);
 }
 
 //runs 100 times
-for(var i = 0; i < 100; i++) 
+for(var i = 0; i < 100; i++)
 {
 	console.log(i);
 }
@@ -57,7 +58,7 @@ Here's a while loop, rewritten
 
 {% highlight javascript %}
 var i = 0;
-while(i < 5) 
+while(i < 5)
 {
 	console.log(i);
 	i++;
@@ -68,9 +69,9 @@ while(i < 5)
 Here's a fun one:
 
 {% highlight javascript %}
-while(true) 
+while(true)
 {
-	
+
 }
 {% endhighlight %}
 
@@ -87,90 +88,5 @@ for(var i = 0; i<10; i++) {
 	if(i>4) {
 		break;
 	}
-}
-{% endhighlight %}
-
-
-Drawing with loops
---------------------------------
-
-Drawing with loops can be rather fun if you play with the *iterator*.
-
-**Cicles of circles circling circles.**
-
-{% highlight javascript %}
-for(var i = 0; i < 10; i++) {
-	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-	fillCircle(200,200,i* 200);
-}
-{% endhighlight %}
-
-**staircase**
-
-{% highlight javascript %}
-ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-for(var i = 0; i < 10; i++) {
-	ctx.fillRect(i*20, i*20, 20, 20);
-}
-{% endhighlight %}
-
-**targeting**
-
-{% highlight javascript %}
-ctx.strokeStyle = "#0000FF"; //begins a blue stroke
-for(var i = 0; i < 10; i++) {
-	drawing.drawCircle(0, 0, i*20, i*20);
-}
-{% endhighlight %}
-
-
-Math.random()
---------------------------------------
-
-The time has come.
-
-Math.random() is a way to get random data into our programs without the need for user input.
-
-It always produces a number between zero and one.
-
-
-**Scaling to a random number**
-
-If you multiply Math.random() it will produce a number between zero and the number you multiply by.
-
-{% highlight javascript %}
-var betweenZeroAndFive = Math.random() * 5;
-{% endhighlight %}
-
-**Scaling to a random, whole number**
-
-Using Math.round.
-
-(You could also using Math.ceil to always round up, or Math.floor to always round down)
-
-{% highlight javascript %}
-var betweenZeroAndFive = Math.round(Math.random() * 5);
-{% endhighlight %}
-
-
-
-Circles.. everywhere
-------------------------------------------
-
-A combination of a loop and a scaled Math.random() can get us a nice result wtihout a lot of work.
-
-{% highlight javascript %}
-var randX;
-var randY;
-var randY;
-
-for(var i:number = 0; i < 100; i++) {
-	ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-
-	randX = Math.random() * 800; //number between 0 and 800
-	randY = Math.random() * 600; //number between 0 and 600
-	randR = Math.random() * 80; //number between 0 and 80
-
-	fillCircle(randX,randY,randR);
 }
 {% endhighlight %}
