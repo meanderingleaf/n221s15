@@ -24,8 +24,10 @@ In order to link to another story segment, put double square brackets around som
 
 Examples:
 
-[[Go home]]
-[[Eat the hot dog]]
+```
+  [[Go home]]
+  [[Eat the hot dog]]
+```
 
 This will create a clickable link for the user, that will allow them to choose where they want to take the story next.
 
@@ -53,7 +55,9 @@ Variables in twine start with a $ (like in php!). Just use letters for your vari
 
 You can use them anywhere in your story, and they will show what value they currently have.
 
+```
   Today I am wearing $currentHat
+```
 
 https://twinery.org/wiki/variable
 
@@ -73,17 +77,23 @@ Subtracting and adding to values in a variable
 
 Let's assume we start off with some money..
 
+```
   <<set $money to 5>>
+```
 
 And then the user makes a choice where they buy a pack of gum. Now they'll have less money. To remove a dollar from their wealth, you can subtract.
 
+```
   <<set $money -= 1>>
+```
 
 Perhaps later on they do some dirty deeds, dirt cheap, and make three dollars. You can also add to their wealth.
 
 And then the user makes a choice where they buy a pack of gum. Now they'll have less money. To remove a dollar from their wealth, you can subtract.
 
+```
   <<set $money += 3>>
+```
 
 https://twinery.org/wiki/set
 
@@ -95,6 +105,7 @@ Logic lets us control what the user sees on the screen based on the values insid
 
 Let's assume you're making that money making game and want a switch based on how much money the player as accrued. You can use a logical expression to control the text shown as such. The statements below will only show one piece of text, either a 'you win' or a 'you lose'.
 
+```
   <<if $money > 2>>
     You win the game!
     [[Good Ending]]
@@ -104,6 +115,7 @@ Let's assume you're making that money making game and want a switch based on how
     You lose the game!
     [[Bad ending]]
   <<endif>>
+```
 
 https://twinery.org/wiki/if
 
