@@ -1,0 +1,117 @@
+---
+layout: post
+title:  "Twine"
+date:   2016-08-23 03:24:54
+categories: update
+---
+
+
+Twine
+---------------------
+
+Twine is a way to create interactive text based stories. Choose your own adventures might be another way to think of them. It has a simple interface that can be accessed at http://twinery.org/2/#stories
+
+
+Making story segments
+-------------------------
+
+You can either use the big green *add segment* button at the bottom of the screen, or use the wiki syntax to link to a new segment.
+
+Linking a segment to another passage
+-------------------------
+
+In order to link to another story segment, put double square brackets around some text. This will link the text in question to the next segment (they must be spelled the same, with no space before or after the name).
+
+Examples:
+
+[[Go home]]
+[[Eat the hot dog]]
+
+This will create a clickable link for the user, that will allow them to choose where they want to take the story next.
+
+
+Changing the story format to Sugarcube
+------------------------
+
+In order for the code in the next section to work, you will need to change the story format.
+
+1. Click on the story name in the lower lefthand corner.
+2. Click "Change Story Format"
+3. Select "Sugarcube" as the format
+
+
+Adding in stats (variables) for your story
+----------------------------
+
+Stats / variables are a way to have a value that might change througout the story.
+
+Variables in twine start with a $ (like in php!). Just use letters for your variable names. Here's some good ones
+
+- $playerName
+- $bravery
+- $currentHat
+
+You can use them anywhere in your story, and they will show what value they currently have.
+
+  Today I am wearing $currentHat
+
+https://twinery.org/wiki/variable
+
+
+Changing values in a variable
+------------------------------------
+
+Over time, based on the choices your reader makes, the values in those variables might change. A new piece of clothing might be put on, or some money exchanged for food. You will want to update the values to reflect this change in the player's state.
+
+
+In order to change a variable's value, you use a combination of the script denominator and the word "to".
+
+  <<set $currentHat to "Mr. Baseball Cap">>
+
+Subtracting and adding to values in a variable
+----------------------------------
+
+Let's assume we start off with some money..
+
+  <<set $money to 5>>
+
+And then the user makes a choice where they buy a pack of gum. Now they'll have less money. To remove a dollar from their wealth, you can subtract.
+
+  <<set $money -= 1>>
+
+Perhaps later on they do some dirty deeds, dirt cheap, and make three dollars. You can also add to their wealth.
+
+And then the user makes a choice where they buy a pack of gum. Now they'll have less money. To remove a dollar from their wealth, you can subtract.
+
+  <<set $money += 3>>
+
+https://twinery.org/wiki/set
+
+Logic
+----------------------------------
+
+Logic lets us control what the user sees on the screen based on the values inside of a variable.
+
+
+Let's assume you're making that money making game and want a switch based on how much money the player as accrued. You can use a logical expression to control the text shown as such. The statements below will only show one piece of text, either a 'you win' or a 'you lose'.
+
+  <<if $money > 2>>
+    You win the game!
+    [[Good Ending]]
+  <<endif>>
+
+  <<if $money < 2>>
+    You lose the game!
+    [[Bad ending]]
+  <<endif>>
+
+https://twinery.org/wiki/if
+
+Saving and sharing your story
+--------------------------------
+
+To get a final file (for a turn in, or to save to your computer/share with people).
+
+1. Click on your story title in the lower lefthand corner.
+2. Select "Publish to file"
+3. This will download an HTML file. You can open that file up in any web browser to play your game again.
